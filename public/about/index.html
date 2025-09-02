@@ -60,10 +60,19 @@
 
 
 
+<link rel="stylesheet" href="/css/glider.min.css">
+<link rel="stylesheet" href="/css/custom.css">
+<script src="/js/glider.min.js"></script>
 
 
 
 
+
+
+        
+<link rel="stylesheet" href="/css/glider.min.css">
+<link rel="stylesheet" href="/css/custom.css">
+<script src="/js/glider.min.js"></script>
 
     </head>
 
@@ -143,5 +152,22 @@
 
 
 
+
+
+<script>
+window.addEventListener('DOMContentLoaded', function(){
+  var gliderElem = document.querySelector('.glider');
+  if (gliderElem) {
+    new Glider(gliderElem, {
+      slidesToShow: 1,
+      dots: '.dots',
+      arrows: {
+        prev: '.glider-prev',
+        next: '.glider-next'
+      }
+    });
+  }
+});
+</script>
     </body>
 </html>

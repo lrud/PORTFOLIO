@@ -6,7 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="author" content="">
-<meta name="description" content="" />
+<meta name="description" content="Credit Market Volatility Research View the full project and code on GitHub « » Research on the impact of credit market stress on asset volatility for Bitcoin and NASDAQ. This project uses Stata for data analysis and modeling, exploring how credit market conditions affect volatility in major assets. Key findings and code are available in the repository.
+ES Futures VPOC Strategy Backtester View the full project and code on GitHub Advanced algorithmic trading strategy for E-mini S&amp;amp;P 500 (ES) futures that combines Volume Point of Control (VPOC) analysis with statistical validation." />
 <meta name="keywords" content="" />
 <meta name="robots" content="noodp" />
 <meta name="theme-color" content="" />
@@ -62,10 +63,19 @@
 
 
 
+<link rel="stylesheet" href="/css/glider.min.css">
+<link rel="stylesheet" href="/css/custom.css">
+<script src="/js/glider.min.js"></script>
 
 
 
 
+
+
+        
+<link rel="stylesheet" href="/css/glider.min.css">
+<link rel="stylesheet" href="/css/custom.css">
+<script src="/js/glider.min.js"></script>
 
     </head>
 
@@ -121,6 +131,113 @@
         <h1>Projects</h1>
 
         
+            <div class="content"><h2 id="credit-market-volatility-research">Credit Market Volatility Research</h2>
+<p><a href="https://github.com/lrud/credit-market-volatility-research">View the full project and code on GitHub</a>
+
+
+
+  
+
+
+  <div class="glider-contain" style="max-width:800px;margin:auto;">
+    <div class="glider" style="height:220px;display:flex;align-items:center;">
+      
+        <img src="/images/projects/credit-market-volatility-research/Stats_of_Key_Variables.png" alt="Stats_of_Key_Variables.png" style="max-width:100%;max-height:200px;height:auto;object-fit:contain;cursor:pointer;" onclick="openModal(this.src, this.alt)">
+      
+        <img src="/images/projects/credit-market-volatility-research/Stats_by_Asset.png" alt="Stats_by_Asset.png" style="max-width:100%;max-height:200px;height:auto;object-fit:contain;cursor:pointer;" onclick="openModal(this.src, this.alt)">
+      
+        <img src="/images/projects/credit-market-volatility-research/Panel_Data.png" alt="Panel_Data.png" style="max-width:100%;max-height:200px;height:auto;object-fit:contain;cursor:pointer;" onclick="openModal(this.src, this.alt)">
+      
+        <img src="/images/projects/credit-market-volatility-research/Quintile_Regression_Bitcoin.png" alt="Quintile_Regression_Bitcoin.png" style="max-width:100%;max-height:200px;height:auto;object-fit:contain;cursor:pointer;" onclick="openModal(this.src, this.alt)">
+      
+        <img src="/images/projects/credit-market-volatility-research/Quintile_Regression_Nasdaq.png" alt="Quintile_Regression_Nasdaq.png" style="max-width:100%;max-height:200px;height:auto;object-fit:contain;cursor:pointer;" onclick="openModal(this.src, this.alt)">
+      
+        <img src="/images/projects/credit-market-volatility-research/py_plot_L_baa_aaa_spread.png" alt="py_plot_L_baa_aaa_spread.png" style="max-width:100%;max-height:200px;height:auto;object-fit:contain;cursor:pointer;" onclick="openModal(this.src, this.alt)">
+      
+        <img src="/images/projects/credit-market-volatility-research/py_plot_L_treasury_spread.png" alt="py_plot_L_treasury_spread.png" style="max-width:100%;max-height:200px;height:auto;object-fit:contain;cursor:pointer;" onclick="openModal(this.src, this.alt)">
+      
+        <img src="/images/projects/credit-market-volatility-research/py_plot_L_implied_vol.png" alt="py_plot_L_implied_vol.png" style="max-width:100%;max-height:200px;height:auto;object-fit:contain;cursor:pointer;" onclick="openModal(this.src, this.alt)">
+      
+        <img src="/images/projects/credit-market-volatility-research/py_plot_L_neg_log_ret.png" alt="py_plot_L_neg_log_ret.png" style="max-width:100%;max-height:200px;height:auto;object-fit:contain;cursor:pointer;" onclick="openModal(this.src, this.alt)">
+      
+    </div>
+    <button aria-label="Previous" class="glider-prev">«</button>
+    <button aria-label="Next" class="glider-next">»</button>
+    
+  </div>
+
+
+<div id="carouselModal" style="display:none;position:fixed;z-index:9999;left:0;top:0;width:100vw;height:100vh;background:rgba(0,0,0,0.85);align-items:center;justify-content:center;">
+  <img id="modalImg" src="" alt="" style="max-width:90vw;max-height:90vh;box-shadow:0 0 32px #000;display:block;margin:auto;">
+</div>
+<script>
+function openModal(src, alt) {
+  var modal = document.getElementById('carouselModal');
+  var img = document.getElementById('modalImg');
+  img.src = src;
+  img.alt = alt;
+  modal.style.display = 'flex';
+}
+document.addEventListener('DOMContentLoaded', function() {
+  var modal = document.getElementById('carouselModal');
+  modal.addEventListener('click', function(e) {
+    if (e.target === modal || e.target === document.getElementById('modalImg')) {
+      modal.style.display = 'none';
+    }
+  });
+  document.addEventListener('keydown', function(e) {
+    if (modal.style.display === 'flex' && e.key === 'Escape') {
+      modal.style.display = 'none';
+    }
+  });
+});
+</script>
+
+Research on the impact of credit market stress on asset volatility for Bitcoin and NASDAQ. This project uses Stata for data analysis and modeling, exploring how credit market conditions affect volatility in major assets. Key findings and code are available in the repository.</p>
+<hr>
+<h2 id="es-futures-vpoc-strategy-backtester">ES Futures VPOC Strategy Backtester</h2>
+<p><a href="https://github.com/lrud/futures_vpoc_backtest">View the full project and code on GitHub</a>
+
+
+
+  
+
+
+  <div style="max-width:800px;margin:auto;text-align:center;">
+    <img src="/images/projects/futures_vpoc_backtest/strategy_comparison.png" alt="strategy_comparison.png" style="max-width:100%;max-height:200px;height:auto;object-fit:contain;cursor:pointer;" onclick="openModal(this.src, this.alt)">
+  </div>
+
+
+<div id="carouselModal" style="display:none;position:fixed;z-index:9999;left:0;top:0;width:100vw;height:100vh;background:rgba(0,0,0,0.85);align-items:center;justify-content:center;">
+  <img id="modalImg" src="" alt="" style="max-width:90vw;max-height:90vh;box-shadow:0 0 32px #000;display:block;margin:auto;">
+</div>
+<script>
+function openModal(src, alt) {
+  var modal = document.getElementById('carouselModal');
+  var img = document.getElementById('modalImg');
+  img.src = src;
+  img.alt = alt;
+  modal.style.display = 'flex';
+}
+document.addEventListener('DOMContentLoaded', function() {
+  var modal = document.getElementById('carouselModal');
+  modal.addEventListener('click', function(e) {
+    if (e.target === modal || e.target === document.getElementById('modalImg')) {
+      modal.style.display = 'none';
+    }
+  });
+  document.addEventListener('keydown', function(e) {
+    if (modal.style.display === 'flex' && e.key === 'Escape') {
+      modal.style.display = 'none';
+    }
+  });
+});
+</script>
+
+Advanced algorithmic trading strategy for E-mini S&amp;P 500 (ES) futures that combines Volume Point of Control (VPOC) analysis with statistical validation. The strategy identifies high-probability trading opportunities by analyzing volume distribution patterns, value area migrations, and market microstructure. Includes ML-enhanced strategy and performance comparison.</p>
+<hr>
+</div>
+        
 
         
     <div class="pagination">
@@ -152,5 +269,22 @@
 
 
 
+
+
+<script>
+window.addEventListener('DOMContentLoaded', function(){
+  var gliderElem = document.querySelector('.glider');
+  if (gliderElem) {
+    new Glider(gliderElem, {
+      slidesToShow: 1,
+      dots: '.dots',
+      arrows: {
+        prev: '.glider-prev',
+        next: '.glider-next'
+      }
+    });
+  }
+});
+</script>
     </body>
 </html>
