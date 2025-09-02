@@ -1,0 +1,11 @@
+.home-subtitle {
+  max-width: 400px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+
+.menu__inner li a.active {
+  color: #e53935 !important;
+  font-weight: bold !important;
+}

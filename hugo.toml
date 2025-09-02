@@ -1,0 +1,30 @@
+[menu]
+	[[menu.main]]
+		identifier = "about"
+		name = "About"
+		url = "/about/"
+		weight = 1
+
+	[[menu.main]]
+		identifier = "projects"
+		name = "Projects"
+		url = "/projects/"
+		weight = 2
+baseURL = 'https://example.org/'
+languageCode = 'en-us'
+title = 'Lukas Rueda'
+theme = "hello-friend-ng"
+[taxonomies]
+	tag = "tags"
+	category = "categories"
+
+[params]
+	homeSubtitle = "Hi, I'm Lukas. Welcome to my personal portfolio site! I am a passionate product manager and data analyst. This site showcases my background, experience, and projects. Feel free to explore and learn more about me and my work."
+	customCSS = ["css/custom.css"]
+
+	[[params.social]]
+		name = "github"
+		url = "https://github.com/lrud"
+	[[params.social]]
+		name = "linkedin"
+		url = "https://www.linkedin.com/in/lukas-r-15769637a"
