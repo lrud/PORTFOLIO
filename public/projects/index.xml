@@ -6,7 +6,27 @@
     <description>Recent content in Projects on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate></lastBuildDate>
     <atom:link href="//localhost:1313/projects/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Credit Market Volatility Research</title>
+      <link>//localhost:1313/projects/credit-market/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/projects/credit-market/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>ES Futures VPOC Strategy Backtester</title>
+      <link>//localhost:1313/projects/es-vpoc/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/projects/es-vpoc/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Modeling Bitcoin&#39;s Implied Volatility Using Machine Learning</title>
+      <link>//localhost:1313/projects/thesis/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/projects/thesis/</guid>
+      <description></description>
+    </item>
   </channel>
 </rss>

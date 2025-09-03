@@ -1,0 +1,42 @@
+{{ define "main" }}
+<main style="background: #f7f7fa; min-height: 80vh; padding: 32px 0;">
+  <h1 style="font-size:2em;font-weight:bold;color:#222;margin-bottom:32px;text-align:center;">Projects</h1>
+  <div class="projects-container">
+    <!-- Minimal hardcoded tile for isolation -->
+    <div class="project-box">
+      <h2 class="project-title">Test Project Tile</h2>
+      <span class="project-status">🟩 Completed</span>
+      <div class="project-subtitle">Testing Card Layout</div>
+      <div class="project-overview">This is a hardcoded test tile to verify CSS and layout.</div>
+      <ul class="project-objectives">
+        <li>Test objective one</li>
+        <li>Test objective two</li>
+      </ul>
+      <div class="project-technologies">Technologies: HTML, CSS</div>
+      <a href="#" class="project-github">GitHub</a>
+    </div>
+    <!-- Debug marker inside .Pages loop -->
+    {{ range .Pages }}
+      <div class="project-box">
+        <div style="background: #ffeb3b; color: #222; font-size: 1em; padding: 8px; text-align: center; margin-bottom: 8px; border: 2px solid #f44336;">DEBUG: Inside .Pages loop for {{ .Title }}</div>
+        <h2 class="project-title">{{ .Title }}</h2>
+        <span class="project-status">{{ .Params.status }}</span>
+        {{ with .Params.subtitle }}<div class="project-subtitle">{{ . }}</div>{{ end }}
+        {{ with .Params.overview }}<div class="project-overview">{{ . }}</div>{{ end }}
+        {{ with .Params.objectives }}
+          <ul class="project-objectives">
+            {{ range . }}<li>{{ . }}</li>{{ end }}
+          </ul>
+        {{ end }}
+        {{ with .Params.technologies }}<div class="project-technologies">Technologies: {{ . }}</div>{{ end }}
+        {{ with .Params.github }}
+          <a href="{{ . }}" target="_blank" class="project-github">GitHub</a>
+        {{ end }}
+        {{ with .Params.carousel }}
+          <div style="width:100%;margin-top:16px;">{{ . | safeHTML }}</div>
+        {{ end }}
+      </div>
+    {{ end }}
+  </div>
+</main>
+{{ end }}

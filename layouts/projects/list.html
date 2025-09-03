@@ -1,0 +1,79 @@
+{{ define "main" }}
+<main style="background: #f7f7fa; min-height: 80vh; padding: 32px 0;">
+  <h1 style="font-size:2em;font-weight:bold;color:#222;margin-bottom:32px;text-align:center;">Projects</h1>
+  <div class="projects-container">
+    {{ $thesis := where .Pages "File.BaseFileName" "thesis" }}
+    {{ $credit := where .Pages "File.BaseFileName" "credit-market" }}
+    {{ $vpoc := where .Pages "File.BaseFileName" "es-vpoc" }}
+    {{ range $thesis }}
+      <div class="project-box">
+        <h2 class="project-title">{{ .Title }}</h2>
+        <span class="project-status">{{ .Params.status }}</span>
+        {{ with .Params.subtitle }}<div class="project-subtitle">{{ . }}</div>{{ end }}
+        {{ with .Params.overview }}<div class="project-overview">{{ . }}</div>{{ end }}
+        {{ with .Params.objectives }}
+          <div class="project-section-title">Objectives</div>
+          <ul class="project-objectives">
+            {{ range . }}<li>{{ . }}</li>{{ end }}
+          </ul>
+        {{ end }}
+        {{ with .Params.technologies }}<div class="project-section-title">Technologies Used</div><div class="project-technologies">{{ . }}</div>{{ end }}
+        {{ with .Params.potential_applications }}
+          <div class="project-section-title">Potential Applications</div>
+          <ul class="project-applications">
+            {{ range . }}<li>{{ . }}</li>{{ end }}
+          </ul>
+        {{ end }}
+        {{ if .Params.github }}
+          <a href="{{ .Params.github }}" target="_blank" class="project-github">GitHub</a>
+        {{ else }}
+          <button class="project-github disabled" disabled>GitHub link soon</button>
+        {{ end }}
+        <!-- No carousel for thesis -->
+      </div>
+    {{ end }}
+    {{ range $credit }}
+      <div class="project-box">
+        <h2 class="project-title">{{ .Title }}</h2>
+        <span class="project-status">{{ .Params.status }}</span>
+        {{ with .Params.subtitle }}<div class="project-subtitle">{{ . }}</div>{{ end }}
+        {{ with .Params.overview }}<div class="project-overview">{{ . }}</div>{{ end }}
+        {{ with .Params.objectives }}
+          <div class="project-section-title">Objectives</div>
+          <ul class="project-objectives">
+            {{ range . }}<li>{{ . }}</li>{{ end }}
+          </ul>
+        {{ end }}
+        {{ with .Params.technologies }}<div class="project-section-title">Technologies Used</div><div class="project-technologies">{{ . }}</div>{{ end }}
+        {{ with .Params.github }}
+          <a href="{{ . }}" target="_blank" class="project-github">GitHub</a>
+        {{ end }}
+        {{ with .Params.carousel }}
+          <div style="width:100%;margin-top:16px;">{{ . | safeHTML }}</div>
+        {{ end }}
+      </div>
+    {{ end }}
+    {{ range $vpoc }}
+      <div class="project-box">
+        <h2 class="project-title">{{ .Title }}</h2>
+        <span class="project-status">{{ .Params.status }}</span>
+        {{ with .Params.subtitle }}<div class="project-subtitle">{{ . }}</div>{{ end }}
+        {{ with .Params.overview }}<div class="project-overview">{{ . }}</div>{{ end }}
+        {{ with .Params.objectives }}
+          <div class="project-section-title">Objectives</div>
+          <ul class="project-objectives">
+            {{ range . }}<li>{{ . }}</li>{{ end }}
+          </ul>
+        {{ end }}
+        {{ with .Params.technologies }}<div class="project-section-title">Technologies Used</div><div class="project-technologies">{{ . }}</div>{{ end }}
+        {{ with .Params.github }}
+          <a href="{{ . }}" target="_blank" class="project-github">GitHub</a>
+        {{ end }}
+        {{ with .Params.carousel }}
+          <div style="width:100%;margin-top:16px;">{{ . | safeHTML }}</div>
+        {{ end }}
+      </div>
+    {{ end }}
+  </div>
+</main>
+{{ end }}
