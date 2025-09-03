@@ -7,10 +7,12 @@ A self-hosted personal portfolio built with Hugo and the hello-friend-ng theme, 
 - Two main sections: About and Projects
 - Static top navigation with active page highlighting
 - Social links (GitHub, LinkedIn) with icons on the About page
-- Custom CSS for layout and styling
+- Custom CSS and Tailwind CSS for layout and styling
 - Homepage redirects to About
 - Projects page with interactive image carousel and modal enlargement
 - Automated local image downloads from GitHub repositories
+- About page features robust Education and Experience tiles with real data, logos, and vertical scroll
+- Dynamic scroll indicator and visual cues for scrollable tiles
 
 ## Recent Progress
 - Projects page now features three projects:
@@ -27,11 +29,22 @@ A self-hosted personal portfolio built with Hugo and the hello-friend-ng theme, 
 - Custom CSS and inline styles for layout and link styling
 - Visual separation between projects using horizontal rules
 
+## About Page Redesign
+- Integrated Tailwind CSS for modern utility-first styling
+- Centered About Me tile with social icons
+- Education and Experience sections now use visually robust, scrollable tiles
+- Real education and experience data with institution logos (locally hosted)
+- Each education entry is full width, left justified, and visually separated
+- Experience entries styled for clarity and consistency
+- Vertical scroll enabled for both tiles, with dynamic scroll indicator (← Scroll)
+- 
+
 ## To Do
 - Add more projects and automate image integration
 - Further refine mobile responsiveness
 - Add analytics or contact options
 - Polish visual design and spacing as needed
+- Continue About page polish and add new sections as needed
 
 ---
 

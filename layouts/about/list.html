@@ -1,10 +1,111 @@
 {{ define "main" }}
-  <main class="main-content">
+<main class="main-content" style="display: flex; flex-direction: column; align-items: center; justify-content: flex-start; min-height: 80vh;">
+  <!-- Centered About Section -->
+  <!-- About Me Tile -->
   <div class="about-description" style="max-width:600px;margin:0 auto 2em auto;text-align:center;">
-      {{ .Content }}
+    <div class="about-me-tile" style="background: #fff; border-radius: 1em; box-shadow: 0 2px 12px rgba(0,0,0,0.07); padding: 1em 1em 1em 1em; border: 1px solid #e5e7eb; display: flex; flex-direction: column; align-items: center;">
+  <h2 style="font-size:1.5em;font-weight:bold;color:#111827;margin-top:0;margin-bottom:0;">About Me</h2>
+  {{ .Content }}
+      <div class="about-social-icons" style="margin-top: 1em;">
+        {{ partial "social-icons.html" .Site.Params.social }}
+      </div>
     </div>
-    <div class="about-social-icons">
-      {{ partial "social-icons.html" .Site.Params.social }}
+  </div>
+  <!-- Education & Experience Tiles Row -->
+  <div class="about-tiles-row" style="display: flex; flex-direction: row; justify-content: center; align-items: stretch; gap: 2em; width: 100%; max-width: 900px;">
+    <!-- Education Tile -->
+    <div style="display:flex;flex-direction:row;align-items:center;width:100%;">
+      <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;margin-right:4px;">
+  <span style="writing-mode:vertical-rl;transform:rotate(180deg);font-size:0.9em;color:#6b7280;letter-spacing:2px;">← Scroll</span>
+      </div>
+      <div class="education-tile scroll-tile" style="flex:1; background: #fff; border-radius: 1em; box-shadow: 0 2px 12px rgba(0,0,0,0.07); padding: 1em 1em 1em 1em; border: 1px solid #e5e7eb; display: flex; flex-direction: column; align-items: center; height: 400px; min-height: 400px; max-height: 400px; overflow-y: auto; position: relative;">
+  <h2 style="font-size:1.5em;font-weight:bold;color:#2563eb;margin-top:0;margin-bottom:0;">Education</h2>
+  <div style="width:100%;display:flex;flex-direction:column;gap:0.5em;">
+      </div>
+  <!-- removed scroll arrow at top of tile -->
+  <div style="background:#f3f4f6;border-radius:0.5em;padding:0.3em 1em;text-align:left;width:100%;box-sizing:border-box;margin-bottom:0.7em;">
+          <div style="font-weight:bold;color:#111827;text-align:left;width:100%;">
+            <img src="/images/Hunter_college_logo.png" alt="Hunter College Logo" style="height:32px;width:auto;vertical-align:middle;margin-right:8px;"> Master of Arts, Economics
+          </div>
+          <div style="color:#2563eb;text-align:left;width:100%;">
+            Hunter College, New York, NY
+          </div>
+          <div style="color:#6b7280;font-size:0.95em;text-align:left;width:100%;">2024 &ndash; Expected Fall 2025</div>
+        </div>
+  <div style="background:#f3f4f6;border-radius:0.5em;padding:0.3em 1em;text-align:left;width:100%;box-sizing:border-box;margin-bottom:0.7em;">
+          <div style="font-weight:bold;color:#111827;text-align:left;width:100%;">
+            <img src="/images/blacksquare-logo.jpg" alt="Brainstation Logo" style="height:40px;width:auto;vertical-align:middle;margin-right:10px;"> Data Science Bootcamp
+          </div>
+          <div style="color:#2563eb;text-align:left;width:100%;">
+            Brainstation, New York, NY
+          </div>
+          <div style="color:#6b7280;font-size:0.95em;text-align:left;width:100%;">2019</div>
+        </div>
+  <div style="background:#f3f4f6;border-radius:0.5em;padding:0.3em 1em;text-align:left;width:100%;box-sizing:border-box;margin-bottom:0.7em;">
+          <div style="font-weight:bold;color:#111827;text-align:left;width:100%;">
+            <img src="/images/cff7c5c5feced5a305ed9997587cf5ef.png" alt="Skidmore College Logo" style="height:40px;width:auto;vertical-align:middle;margin-right:10px;"> Bachelor of Science, Mathematics
+          </div>
+          <div style="color:#2563eb;text-align:left;width:100%;">
+            Skidmore College, Saratoga Springs, NY
+          </div>
+          <div style="color:#6b7280;font-size:0.95em;text-align:left;width:100%;">2014 &ndash; 2018</div>
+        </div>
+      </div>
     </div>
-  </main>
+    <!-- Experience Tile -->
+    <div style="display:flex;flex-direction:row;align-items:center;width:100%;">
+      <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;margin-right:4px;">
+  <span style="writing-mode:vertical-rl;transform:rotate(180deg);font-size:0.9em;color:#6b7280;letter-spacing:2px;">← Scroll</span>
+      </div>
+      <div class="experience-tile scroll-tile" style="flex:1; background: #fff; border-radius: 1em; box-shadow: 0 2px 12px rgba(0,0,0,0.07); padding: 1em 1em 1em 1em; border: 1px solid #e5e7eb; display: flex; flex-direction: column; align-items: center; height: 400px; min-height: 400px; max-height: 400px; overflow-y: auto; position: relative;">
+  <h2 style="font-size:1.5em;font-weight:bold;color:#059669;margin-top:0;margin-bottom:0;">Experience</h2>
+  <div style="width:100%;display:flex;flex-direction:column;gap:0.5em;">
+      </div>
+  <!-- removed scroll arrow at top of tile -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.scroll-tile').forEach(function(tile) {
+    var arrow = tile.querySelector('.scroll-arrow');
+    function updateArrow() {
+      if (tile.scrollHeight > tile.clientHeight && tile.scrollTop + tile.clientHeight < tile.scrollHeight - 2) {
+        arrow.style.display = 'block';
+      } else {
+        arrow.style.display = 'none';
+      }
+    }
+    tile.addEventListener('scroll', updateArrow);
+    updateArrow();
+    window.addEventListener('resize', updateArrow);
+  });
+});
+</script>
+        <div style="margin-bottom:0.5em;">
+          <span style="font-weight:bold;color:#111827;">Economics Tutor</span> | Hunter College | New York, NY <br>
+          <span style="color:#6b7280;">Aug 2024 – Present</span>
+          <div style="color:#4b5563;font-size:0.95em;">Tutors undergraduate students in econometric and statistical concepts, improving analytical reasoning and problem-solving in quantitative economics.</div>
+        </div>
+        <div style="margin-bottom:0.5em;">
+          <span style="font-weight:bold;color:#111827;">Independent Futures Trader</span> | Principles of Sovereignty LLC | Brooklyn, NY <br>
+          <span style="color:#6b7280;">Jan 2021 – Aug 2024</span>
+          <div style="color:#4b5563;font-size:0.95em;">Analyzed Bitcoin options and market index futures, managed a portfolio of financial derivatives, and provided actionable market commentary.</div>
+        </div>
+        <div style="margin-bottom:0.5em;">
+          <span style="font-weight:bold;color:#111827;">Product Manager</span> | OpenSponsorship | New York, NY <br>
+          <span style="color:#6b7280;">July 2020 – Dec 2020</span>
+          <div style="color:#4b5563;font-size:0.95em;">Led a data-informed redesign that increased user onboarding completion by 40%, authored foundational documentation for data sources and methodologies.</div>
+        </div>
+        <div style="margin-bottom:0.5em;">
+          <span style="font-weight:bold;color:#111827;">Junior Product Manager</span> | ObsessVR | New York, NY <br>
+          <span style="color:#6b7280;">Jan 2020 – July 2020</span>
+          <div style="color:#4b5563;font-size:0.95em;">Drove development of a critical internal GUI, enhancing operational efficiency by 75%.</div>
+        </div>
+        <div style="margin-bottom:0.5em;">
+          <span style="font-weight:bold;color:#111827;">Technical Project Manager</span> | GUESST | New York, NY <br>
+          <span style="color:#6b7280;">Nov 2018 – Jan 2020</span>
+          <div style="color:#4b5563;font-size:0.95em;">Spearheaded a complete UI/UX overhaul, replacing manual processes with an intuitive, swipe-based interface.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
 {{ end }}

@@ -1,0 +1,25 @@
+{
+  "name": "portfolio_site",
+  "version": "1.0.0",
+  "description": "A self-hosted personal portfolio built with Hugo and the hello-friend-ng theme, showcasing selected projects with interactive image displays.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lrud/PORTFOLIO.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lrud/PORTFOLIO/issues"
+  },
+  "homepage": "https://github.com/lrud/PORTFOLIO#readme",
+  "dependencies": {
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.3.3"
+  }
+}

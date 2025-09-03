@@ -1,9 +1,48 @@
+.about-social-icons {
+  text-align: center;
+}
+a.project-section h2,
+a.project-section h3,
+a.project-section p,
+a.project-section ul,
+a.project-section ol {
+  margin-bottom: 0.35em;
+}
+
+/* If .project-section is not used, target markdown content inside .content or main */
+ .content {
+  text-align: left;
+}
+.content h2,
+.content h3,
+.content p,
+.content ul,
+.content ol {
+  margin-bottom: 0.35em;
+}
+a.project-section h2,
+a.project-section h3,
+a.project-section p,
+a.project-section ul,
+a.project-section ol {
+  margin-bottom: 0.5em;
+}
+
+/* If .project-section is not used, target markdown content inside .content or main */
+.content h2,
+.content h3,
+.content p,
+.content ul,
+.content ol {
+  margin-bottom: 0.5em;
+}
+@import url("status-flag.css");
+
 .home-subtitle {
   max-width: 400px;
   margin: 0 auto;
   text-align: center;
 }
-
 
 .menu__inner li a.active {
   color: #e53935 !important;
@@ -17,4 +56,10 @@
   box-shadow: 0 2px 10px rgba(0,0,0,0.04);
   padding: 24px 28px;
   margin-bottom: 36px;
+}
+
+a.github-link {
+  color: #1976d2 !important;
+  font-weight: 600 !important;
+  text-decoration: underline !important;
 }

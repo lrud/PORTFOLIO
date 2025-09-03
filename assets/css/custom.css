@@ -1,0 +1,9 @@
+@import url("status-flag.css");
+
+/* ...existing code... */
+
+a.github-link {
+  color: #1976d2;
+  font-weight: 600;
+  text-decoration: underline;
+}
