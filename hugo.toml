@@ -28,3 +28,11 @@ theme = "hello-friend-ng"
 	[[params.social]]
 		name = "linkedin"
 		url = "https://www.linkedin.com/in/lukas-r-15769637a"
+	[[params.social]]
+		name = "email"
+		url = "mailto:lrud1314@pm.me"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
