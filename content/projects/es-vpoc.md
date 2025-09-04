@@ -9,7 +9,8 @@ objectives:
   - "Validate strategy performance with statistical and ML metrics"
 technologies: "Python (pandas, numpy, matplotlib, seaborn, scikit-learn, statsmodels, pandas-ta, torch, mpi4py), Jupyter Notebooks (strategy prototyping, analysis)"
 github: "https://github.com/lrud/futures_vpoc_backtest"
-carousel: "{{< carousel project=\"futures_vpoc_backtest\" >}}"
 draft: false
 ---
+
+{{< carousel project="futures_vpoc_backtest" >}}
 

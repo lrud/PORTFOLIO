@@ -9,7 +9,8 @@ objectives:
   - "Visualize and interpret quantile regression results"
 technologies: "Stata (panel data prep, regression, quantile regression, table generation), Python (pandas, numpy, matplotlib for data visualization)"
 github: "https://github.com/lrud/credit-market-volatility-research"
-carousel: "{{< carousel project=\"credit-market-volatility\" >}}"
 draft: false
 ---
+
+{{< carousel project="credit-market-volatility-research" >}}
 
