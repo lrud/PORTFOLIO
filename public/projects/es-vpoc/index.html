@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="author" content="">
-<meta name="description" content="" />
+<meta name="description" content=" Click Me &amp;#8593; " />
 <meta name="keywords" content="" />
 <meta name="robots" content="noodp" />
 <meta name="theme-color" content="" />
@@ -47,12 +47,12 @@
 
 
 <meta itemprop="name" content="ES Futures VPOC Strategy Backtester">
-<meta itemprop="description" content="">
+<meta itemprop="description" content=" Click Me &#8593; ">
 
-<meta itemprop="wordCount" content="0">
+<meta itemprop="wordCount" content="3">
 <meta itemprop="keywords" content="" />
 <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="ES Futures VPOC Strategy Backtester"/>
-<meta name="twitter:description" content=""/>
+<meta name="twitter:description" content=" Click Me &#8593; "/>
 
 
 
@@ -75,12 +75,6 @@
 
 
 
-
-        
-<link rel="stylesheet" href="/css/glider.min.css">
-<link rel="stylesheet" href="/css/custom.css">
-<link rel="stylesheet" href="/css/status-flag.css">
-<script src="/js/glider.min.js"></script>
 
     </head>
 
@@ -109,11 +103,10 @@
 
         <span class="header__right">
                 <nav class="menu">
-    <ul class="menu__inner"><li>
-                            <a href="/about/">About</a>
-                        </li><li>
-                            <a href="/projects/">Projects</a>
-                        </li>
+    <ul class="menu__inner"><li style="flex:1;text-align:center;list-style:none;font-size:0.85em;font-style:italic;font-weight:400;letter-spacing:0.01em;color:#888;padding:0 32px;">
+            This experience is not yet optimized for mobile use
+        </li>
+        <li><a href="/about/">About</a></li><li><a href="/projects/">Projects</a></li>
     </ul>
 </nav>
 
@@ -146,6 +139,110 @@
 
             <div class="post-content">
                 
+
+
+  
+
+
+  <div style="max-width:800px;margin:auto;text-align:center;display:flex;flex-direction:column;align-items:center;">
+    <img id="vpoc-img" src="/images/projects/futures_vpoc_backtest/strategy_comparison.png" alt="strategy_comparison.png" style="max-width:100%;max-height:200px;height:auto;object-fit:contain;cursor:pointer;display:block;margin:0 auto;" onclick="openModal(this.src, this.alt)">
+    <div style="font-size:0.85em;color:#888;margin-top:4px;">Click Me <span style="font-size:1.2em;vertical-align:middle;">&#8593;</span></div>
+  </div>
+
+
+<div id="carouselModal" style="display:none;position:fixed;z-index:9999;left:0;top:0;width:100vw;height:100vh;background:rgba(0,0,0,0.85);align-items:center;justify-content:center;">
+  <img id="modalImg" src="" alt="" style="max-width:90vw;max-height:90vh;box-shadow:0 0 32px #000;display:block;margin:auto;">
+</div>
+
+
+<script>
+var modalCurrentIndex = 0;
+var modalImages = [];
+function openModal(src, alt) {
+  var modal = document.getElementById('carouselModal');
+  var img = document.getElementById('modalImg');
+  img.src = src;
+  img.alt = alt;
+  modal.style.display = 'flex';
+  
+  var vpocImg = document.getElementById('vpoc-img');
+  if (vpocImg && src === vpocImg.src) {
+    modalImages = [vpocImg];
+    modalCurrentIndex = 0;
+    return;
+  }
+  
+  modalImages = Array.from(document.querySelectorAll('.glider img'));
+  modalCurrentIndex = modalImages.findIndex(function(i){ return i.src === img.src || i.getAttribute('src') === img.src; });
+}
+document.addEventListener('DOMContentLoaded', function() {
+  var modal = document.getElementById('carouselModal');
+  modal.addEventListener('click', function(e) {
+    if (e.target === modal || e.target === document.getElementById('modalImg')) {
+      modal.style.display = 'none';
+    }
+  });
+  
+  var gliderElem = document.querySelector('.glider');
+  if (gliderElem && typeof Glider !== 'undefined') {
+    window._gliderInstance = new Glider(gliderElem, {
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      draggable: true,
+      arrows: {
+        prev: '.glider-prev',
+        next: '.glider-next'
+      },
+      dots: '.dots'
+    });
+  }
+});
+
+document.addEventListener('keydown', function(e) {
+  var modal = document.getElementById('carouselModal');
+  var isModalOpen = modal && modal.style.display === 'flex';
+  var gliderElem = document.querySelector('.glider');
+  
+  if (isModalOpen && modalImages.length > 0) {
+    if (e.key === 'ArrowLeft') {
+      if (modalCurrentIndex > 0) {
+        modalCurrentIndex--;
+        var img = document.getElementById('modalImg');
+        img.src = modalImages[modalCurrentIndex].src;
+        img.alt = modalImages[modalCurrentIndex].alt;
+      }
+      e.preventDefault();
+      return;
+    }
+    if (e.key === 'ArrowRight') {
+      if (modalCurrentIndex < modalImages.length - 1) {
+        modalCurrentIndex++;
+        var img = document.getElementById('modalImg');
+        img.src = modalImages[modalCurrentIndex].src;
+        img.alt = modalImages[modalCurrentIndex].alt;
+      }
+      e.preventDefault();
+      return;
+    }
+    if (e.key === 'Escape') {
+      modal.style.display = 'none';
+      e.preventDefault();
+      return;
+    }
+  }
+  
+  if (gliderElem && typeof Glider !== 'undefined' && window._gliderInstance) {
+    if (e.key === 'ArrowLeft') {
+      window._gliderInstance.scrollItem('prev');
+    }
+    if (e.key === 'ArrowRight') {
+      window._gliderInstance.scrollItem('next');
+    }
+  }
+});
+</script>
+
+
             </div>
         </article>
 
@@ -177,22 +274,5 @@
 
 
 
-
-
-<script>
-window.addEventListener('DOMContentLoaded', function(){
-  var gliderElem = document.querySelector('.glider');
-  if (gliderElem) {
-    new Glider(gliderElem, {
-      slidesToShow: 1,
-      dots: '.dots',
-      arrows: {
-        prev: '.glider-prev',
-        next: '.glider-next'
-      }
-    });
-  }
-});
-</script>
     </body>
 </html>
