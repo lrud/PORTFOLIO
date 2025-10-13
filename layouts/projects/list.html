@@ -1,4 +1,120 @@
 {{ define "main" }}
+<style>
+.projects-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px;
+  align-items: center;
+  width: 100%;
+}
+
+.project-box {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e5e7eb;
+  height: 500px;
+  overflow-y: auto;
+  position: relative;
+}
+
+.project-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #1f2937;
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+
+.project-status {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: 12px;
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.project-subtitle {
+  font-size: 1rem;
+  color: #6b7280;
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
+.project-overview {
+  font-size: 0.95rem;
+  color: #374151;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+.project-section-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  border-bottom: 2px solid #e5e7eb;
+  padding-bottom: 4px;
+}
+
+.project-content {
+  font-size: 0.9rem;
+  color: #4b5563;
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+
+.project-technologies {
+  background: #f3f4f6;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  color: #374151;
+  margin-bottom: 12px;
+}
+
+.project-github {
+  display: inline-block;
+  background: #1f2937;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-top: 16px;
+}
+
+.project-github:hover {
+  background: #374151;
+}
+
+.project-github.disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+  border: none;
+}
+
+.project-objectives, .project-applications {
+  margin: 8px 0;
+  padding-left: 1rem;
+}
+
+.project-objectives li, .project-applications li {
+  margin-bottom: 4px;
+  color: #4b5563;
+  font-size: 0.9rem;
+}
+</style>
+
 <main style="background: #f7f7fa; min-height: 80vh; padding: 32px 0; overflow: visible;">
   <h1 style="font-size:2em;font-weight:bold;color:#222;margin-bottom:32px;text-align:center;">Projects</h1>
   <div class="projects-container">
@@ -26,35 +142,39 @@
           <div class="project-content"><strong>{{ .name }}:</strong> {{ .period }} ({{ .source }})</div>
         {{ end }}
         
-        {{ if .Params.core_predictors }}
-          <div class="project-section-title">Core Predictors</div>
-          <ul style="list-style-type: disc; list-style-position: inside; padding-left: 1rem; margin: 0.5rem 0;">
-            {{ range .Params.core_predictors }}
-              <li style="display: list-item; margin-bottom: 0.5rem;">
-                <strong>{{ .name }}:</strong> {{ .description }}
-                {{ with .justification }}<br><em>Academic Justification:</em> {{ . }}{{ end }}
-              </li>
-            {{ end }}
-          </ul>
-        {{ end }}
-        
-        {{ if .Params.academic_contributions }}
-          <div class="project-section-title">Academic Contributions</div>
-          <ul style="list-style-type: disc; list-style-position: inside; padding-left: 1rem; margin: 0.5rem 0;">
-            {{ range .Params.academic_contributions }}
-              <li style="display: list-item; margin-bottom: 0.25rem;">{{ . }}</li>
-            {{ end }}
-          </ul>
-        {{ end }}
-        
-        {{ if .Params.validation_framework }}
-          <div class="project-section-title">Validation Framework</div>
-          <ul style="list-style-type: disc; list-style-position: inside; padding-left: 1rem; margin: 0.5rem 0;">
-            {{ range .Params.validation_framework }}
-              <li style="display: list-item; margin-bottom: 0.25rem;">{{ . }}</li>
-            {{ end }}
-          </ul>
-        {{ end }}
+          {{ if .Params.core_predictors }}
+            <div class="project-section-title">Core Predictors</div>
+            <ul style="list-style-type: disc; list-style-position: outside; padding-left: 1.5rem; margin: 0.5rem 0;">
+              {{ range .Params.core_predictors }}
+                <li style="display: list-item; margin-bottom: 0.5rem;">
+                  <strong>{{ .name }}:</strong> {{ .description }}
+                  {{ with .justification }}
+                    <ul style="list-style-type: circle; list-style-position: outside; margin-top: 0.25rem; padding-left: 1.5rem;">
+                      <li style="display: list-item; font-style: italic; color: #6b7280; font-size: 0.85rem;">
+                        <em>Academic Justification:</em> {{ . }}
+                      </li>
+                    </ul>
+                  {{ end }}
+                </li>
+              {{ end }}
+            </ul>
+          {{ end }}                  {{ if .Params.academic_contributions }}
+            <div class="project-section-title">Academic Contributions</div>
+            <ul style="list-style-type: disc; list-style-position: outside; padding-left: 1.5rem; margin: 0.5rem 0;">
+              {{ range .Params.academic_contributions }}
+                <li style="display: list-item; margin-bottom: 0.25rem;">{{ . }}</li>
+              {{ end }}
+            </ul>
+          {{ end }}
+          
+          {{ if .Params.validation_framework }}
+            <div class="project-section-title">Validation Framework</div>
+            <ul style="list-style-type: disc; list-style-position: outside; padding-left: 1.5rem; margin: 0.5rem 0;">
+              {{ range .Params.validation_framework }}
+                <li style="display: list-item; margin-bottom: 0.25rem;">{{ . }}</li>
+              {{ end }}
+            </ul>
+          {{ end }}
         {{ with .Params.technologies }}<div class="project-section-title">Technologies Used</div><div class="project-technologies">{{ . }}</div>{{ end }}
         {{ with .Params.potential_applications }}
           <div class="project-section-title">Potential Applications</div>
