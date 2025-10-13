@@ -16,27 +16,24 @@
         {{ with .Params.subtitle }}<div class="project-subtitle">{{ . }}</div>{{ end }}
         {{ with .Params.overview }}<div class="project-overview">{{ . }}</div>{{ end }}
         
-        <!-- Comprehensive thesis content -->
-        <div class="project-section-title">Abstract</div>
-        <div class="project-content">This comprehensive research project explores the application of Long Short-Term Memory (LSTM) neural networks for forecasting market volatility, with a specific focus on Bitcoin implied volatility (DVOL). The thesis combines traditional financial econometrics with modern machine learning techniques to develop a hybrid forecasting model.</div>
+        {{ with .Params.research_objective }}
+          <div class="project-section-title">Research Objective</div>
+          <div class="project-content">{{ . }}</div>
+        {{ end }}
         
-        <div class="project-section-title">Research Methodology</div>
-        <div class="project-subsection-title">Data Collection & Preprocessing</div>
-        <ul style="list-style-type: disc; list-style-position: inside; padding-left: 1rem; margin: 0.5rem 0;">
-          <li style="display: list-item; margin-bottom: 0.25rem;">Compiled comprehensive dataset spanning 2021-present of high-frequency market data</li>
-          <li style="display: list-item; margin-bottom: 0.25rem;">Integrated multiple data sources including on-chain metrics and derivatives markets</li>
-          <li style="display: list-item; margin-bottom: 0.25rem;">Applied sophisticated feature engineering techniques to extract predictive variables</li>
-          <li style="display: list-item; margin-bottom: 0.25rem;">Implemented robust data validation and outlier detection procedures</li>
-        </ul>
-        
-        <div class="project-subsection-title" style="font-weight: bold; text-decoration: underline;"><strong><u>Model Architecture</u></strong></div>
-        <div class="project-content">The LSTM model incorporates a multi-layered architecture designed for sequential volatility prediction with input sequence windows, dropout regularization, and SHAP analysis for interpretability.</div>
+        {{ with .Params.dependent_variable }}
+          <div class="project-section-title">Dependent Variable</div>
+          <div class="project-content"><strong>{{ .name }}:</strong> {{ .period }} ({{ .source }})</div>
+        {{ end }}
         
         {{ if .Params.core_predictors }}
           <div class="project-section-title">Core Predictors</div>
           <ul style="list-style-type: disc; list-style-position: inside; padding-left: 1rem; margin: 0.5rem 0;">
             {{ range .Params.core_predictors }}
-              <li style="display: list-item; margin-bottom: 0.25rem;"><strong>{{ .name }}:</strong> {{ .description }}</li>
+              <li style="display: list-item; margin-bottom: 0.5rem;">
+                <strong>{{ .name }}:</strong> {{ .description }}
+                {{ with .justification }}<br><em>Academic Justification:</em> {{ . }}{{ end }}
+              </li>
             {{ end }}
           </ul>
         {{ end }}
@@ -50,10 +47,12 @@
           </ul>
         {{ end }}
         
-        {{ with .Params.objectives }}
-          <div class="project-section-title">Objectives</div>
+        {{ if .Params.validation_framework }}
+          <div class="project-section-title">Validation Framework</div>
           <ul style="list-style-type: disc; list-style-position: inside; padding-left: 1rem; margin: 0.5rem 0;">
-            {{ range . }}<li style="display: list-item; margin-bottom: 0.25rem;">{{ . }}</li>{{ end }}
+            {{ range .Params.validation_framework }}
+              <li style="display: list-item; margin-bottom: 0.25rem;">{{ . }}</li>
+            {{ end }}
           </ul>
         {{ end }}
         {{ with .Params.technologies }}<div class="project-section-title">Technologies Used</div><div class="project-technologies">{{ . }}</div>{{ end }}
