@@ -1,20 +1,20 @@
 {{ $project := .Get "project" | default "credit-market-volatility-research" }}
 {{ $images := slice }}
 {{ if eq $project "credit-market-volatility-research" }}
-  {{ $images = slice "Stats_of_Key_Variables.png" "Stats_by_Asset.png" "Panel_Data.png" "Quintile_Regression_Bitcoin.png" "Quintile_Regression_Nasdaq.png" "py_plot_L_baa_aaa_spread.png" "py_plot_L_treasury_spread.png" "py_plot_L_implied_vol.png" "py_plot_L_neg_log_ret.png" }}
+  {{ $images = slice "Stats_of_Key_Variables.png" "Stats_by_Asset.png" "Quintile_Regression_Bitcoin.png" "Quintile_Regression_Nasdaq.png" "py_plot_L_baa_aaa_spread.png" "py_plot_L_treasury_spread.png" "py_plot_L_implied_vol.png" "py_plot_L_neg_log_ret.png" }}
 {{ else if eq $project "futures_vpoc_backtest" }}
   {{ $images = slice "strategy_comparison.png" }}
 {{ end }}
 {{ if eq $project "futures_vpoc_backtest" }}
-  <div style="max-width:800px;margin:auto;text-align:center;display:flex;flex-direction:column;align-items:center;">
-    <img id="vpoc-img" src="/images/projects/{{ $project }}/{{ index $images 0 }}" alt="{{ index $images 0 }}" style="max-width:100%;max-height:200px;height:auto;object-fit:contain;cursor:pointer;display:block;margin:0 auto;" onclick="openModal(this.src, this.alt)">
-    <div style="font-size:0.85em;color:#888;margin-top:4px;">Click Me <span style="font-size:1.2em;vertical-align:middle;">&#8593;</span></div>
+  <div style="max-width:100%;margin:auto;text-align:center;display:flex;flex-direction:column;align-items:center;overflow:hidden;">
+    <img id="vpoc-img" src="/images/projects/{{ $project }}/{{ index $images 0 }}" alt="{{ index $images 0 }}" style="max-width:100%;max-height:120px;height:auto;object-fit:contain;cursor:pointer;display:block;margin:0 auto;" onclick="openModal(this.src, this.alt)">
+    <div style="font-size:0.75em;color:#888;margin-top:4px;">Click Me <span style="font-size:1.2em;vertical-align:middle;">&#8593;</span></div>
   </div>
 {{ else }}
-  <div class="glider-contain" style="max-width:800px;margin:auto;">
-    <div class="glider" style="height:220px;display:flex;align-items:center;">
+  <div class="glider-contain" style="max-width:100%;margin:auto;overflow:hidden;">
+    <div class="glider" style="height:140px;display:flex;align-items:center;overflow-x:auto;gap:0.5rem;padding:0.5rem 0;">
       {{ range $img := $images }}
-        <img src="/images/projects/{{ $project }}/{{ $img }}" alt="{{ $img }}" style="max-width:100%;max-height:200px;height:auto;object-fit:contain;cursor:pointer;" onclick="openModal(this.src, this.alt)">
+        <img src="/images/projects/{{ $project }}/{{ $img }}" alt="{{ $img }}" style="max-width:150px;max-height:120px;height:auto;object-fit:contain;cursor:pointer;flex-shrink:0;border-radius:0.25rem;" onclick="openModal(this.src, this.alt)">
       {{ end }}
     </div>
     <button aria-label="Previous" class="glider-prev">«</button>
@@ -35,53 +35,117 @@
 </div>
 {{ end }}
 <script>
+// Global variables for modal navigation
 var modalCurrentIndex = 0;
 var modalImages = [];
+var modalEventHandlerAttached = false;
+
+// Define the image arrays for each project
+var projectImages = {
+  'credit-market-volatility-research': [
+    'Stats_of_Key_Variables.png',
+    'Stats_by_Asset.png', 
+    'Quintile_Regression_Bitcoin.png',
+    'Quintile_Regression_Nasdaq.png',
+    'py_plot_L_baa_aaa_spread.png',
+    'py_plot_L_treasury_spread.png',
+    'py_plot_L_implied_vol.png',
+    'py_plot_L_neg_log_ret.png'
+  ],
+  'futures_vpoc_backtest': [
+    'strategy_comparison.png'
+  ]
+};
+
 function openModal(src, alt) {
   var modal = document.getElementById('carouselModal');
   var img = document.getElementById('modalImg');
   img.src = src;
   img.alt = alt;
   modal.style.display = 'flex';
-  // For VPOC, just set single image
+  
+  // For VPOC project (single image)
   var vpocImg = document.getElementById('vpoc-img');
   if (vpocImg && src === vpocImg.src) {
     modalImages = [vpocImg];
     modalCurrentIndex = 0;
+    console.log('VPOC single image modal');
     return;
   }
-  // For carousel, find all images
-  modalImages = Array.from(document.querySelectorAll('.glider img'));
-  modalCurrentIndex = modalImages.findIndex(function(i){ return i.src === img.src || i.getAttribute('src') === img.src; });
+  
+  // For multi-image carousels, always use predefined arrays
+  var normalizedSrc = src.split('/').pop(); // Get filename only
+  var projectName = '';
+  
+  // Determine project from URL path
+  if (src.includes('credit-market-volatility-research')) {
+    projectName = 'credit-market-volatility-research';
+  } else if (src.includes('futures_vpoc_backtest')) {
+    projectName = 'futures_vpoc_backtest';
+  }
+  
+  if (projectName && projectImages[projectName]) {
+    var imageArray = projectImages[projectName];
+    modalImages = [];
+    
+    // Create full image objects for navigation
+    for (var i = 0; i < imageArray.length; i++) {
+      var imgObj = {
+        src: '/images/projects/' + projectName + '/' + imageArray[i],
+        alt: imageArray[i]
+      };
+      modalImages.push(imgObj);
+    }
+    
+    // Find current index in the predefined array
+    modalCurrentIndex = imageArray.indexOf(normalizedSrc);
+    
+  } else {
+    modalImages = [{src: src, alt: alt}];
+    modalCurrentIndex = 0;
+  }
+  
+  // Safety check
+  if (modalCurrentIndex === -1) {
+    modalCurrentIndex = 0;
+  }
 }
 document.addEventListener('DOMContentLoaded', function() {
   var modal = document.getElementById('carouselModal');
-  modal.addEventListener('click', function(e) {
-    if (e.target === modal || e.target === document.getElementById('modalImg')) {
-      modal.style.display = 'none';
-    }
-  });
+  if (modal) {
+    modal.addEventListener('click', function(e) {
+      if (e.target === modal || e.target === document.getElementById('modalImg')) {
+        modal.style.display = 'none';
+      }
+    });
+  }
+  
   // Initialize Glider.js carousel
   var gliderElem = document.querySelector('.glider');
   if (gliderElem && typeof Glider !== 'undefined') {
+    var imageCount = gliderElem.querySelectorAll('img').length;
     window._gliderInstance = new Glider(gliderElem, {
-      slidesToShow: 1,
+      slidesToShow: Math.min(3, imageCount),
       slidesToScroll: 1,
       draggable: true,
+      scrollLock: false,
+      rewind: false,
       arrows: {
         prev: '.glider-prev',
         next: '.glider-next'
-      },
-      dots: '.dots'
+      }
     });
   }
 });
 
-document.addEventListener('keydown', function(e) {
+// Attach keydown handler only once
+if (!modalEventHandlerAttached) {
+  modalEventHandlerAttached = true;
+  document.addEventListener('keydown', function(e) {
   var modal = document.getElementById('carouselModal');
   var isModalOpen = modal && modal.style.display === 'flex';
-  var gliderElem = document.querySelector('.glider');
-  // Modal image navigation
+  
+  // Modal image navigation - handle this FIRST and stop all other processing
   if (isModalOpen && modalImages.length > 0) {
     if (e.key === 'ArrowLeft') {
       if (modalCurrentIndex > 0) {
@@ -91,8 +155,11 @@ document.addEventListener('keydown', function(e) {
         img.alt = modalImages[modalCurrentIndex].alt;
       }
       e.preventDefault();
-      return;
+      e.stopPropagation();
+      e.stopImmediatePropagation();
+      return false;
     }
+    
     if (e.key === 'ArrowRight') {
       if (modalCurrentIndex < modalImages.length - 1) {
         modalCurrentIndex++;
@@ -101,16 +168,31 @@ document.addEventListener('keydown', function(e) {
         img.alt = modalImages[modalCurrentIndex].alt;
       }
       e.preventDefault();
-      return;
+      e.stopPropagation();
+      e.stopImmediatePropagation();
+      return false;
     }
+    
     if (e.key === 'Escape') {
       modal.style.display = 'none';
       e.preventDefault();
-      return;
+      e.stopPropagation();
+      e.stopImmediatePropagation();
+      return false;
+    }
+    
+    // For any other keys when modal is open, just prevent default to avoid interference
+    if (e.key.startsWith('Arrow')) {
+      e.preventDefault();
+      e.stopPropagation();
+      e.stopImmediatePropagation();
+      return false;
     }
   }
-  // Keyboard navigation for Glider.js
-  if (gliderElem && typeof Glider !== 'undefined' && window._gliderInstance) {
+  
+  // Only handle Glider.js navigation when modal is NOT open
+  var gliderElem = document.querySelector('.glider');
+  if (!isModalOpen && gliderElem && typeof Glider !== 'undefined' && window._gliderInstance) {
     if (e.key === 'ArrowLeft') {
       window._gliderInstance.scrollItem('prev');
     }
@@ -118,5 +200,6 @@ document.addEventListener('keydown', function(e) {
       window._gliderInstance.scrollItem('next');
     }
   }
-});
+  });
+}
 </script>

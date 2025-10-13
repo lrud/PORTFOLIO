@@ -1,20 +1,59 @@
 {{ define "main" }}
-<main style="background: #f7f7fa; min-height: 80vh; padding: 32px 0;">
+<main style="background: #f7f7fa; min-height: 80vh; padding: 32px 0; overflow: visible;">
   <h1 style="font-size:2em;font-weight:bold;color:#222;margin-bottom:32px;text-align:center;">Projects</h1>
   <div class="projects-container">
     {{ $thesis := where .Pages "File.BaseFileName" "thesis" }}
     {{ $credit := where .Pages "File.BaseFileName" "credit-market" }}
     {{ $vpoc := where .Pages "File.BaseFileName" "es-vpoc" }}
     {{ range $thesis }}
-      <div class="project-box">
+      <div style="display:flex;flex-direction:row;align-items:center;width:100%;">
+        <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;margin-right:4px;">
+          <span style="writing-mode:vertical-rl;transform:rotate(180deg);font-size:0.9em;color:#6b7280;letter-spacing:2px;">← Scroll</span>
+        </div>
+        <div class="project-box" style="flex:1; position: relative;">
         <h2 class="project-title">{{ .Title }}</h2>
         <span class="project-status">{{ .Params.status }}</span>
         {{ with .Params.subtitle }}<div class="project-subtitle">{{ . }}</div>{{ end }}
         {{ with .Params.overview }}<div class="project-overview">{{ . }}</div>{{ end }}
+        
+        <!-- Comprehensive thesis content -->
+        <div class="project-section-title">Abstract</div>
+        <div class="project-content">This comprehensive research project explores the application of Long Short-Term Memory (LSTM) neural networks for forecasting market volatility, with a specific focus on Bitcoin implied volatility (DVOL). The thesis combines traditional financial econometrics with modern machine learning techniques to develop a hybrid forecasting model.</div>
+        
+        <div class="project-section-title">Research Methodology</div>
+        <div class="project-subsection-title">Data Collection & Preprocessing</div>
+        <ul style="list-style-type: disc; list-style-position: inside; padding-left: 1rem; margin: 0.5rem 0;">
+          <li style="display: list-item; margin-bottom: 0.25rem;">Compiled comprehensive dataset spanning 2021-present of high-frequency market data</li>
+          <li style="display: list-item; margin-bottom: 0.25rem;">Integrated multiple data sources including on-chain metrics and derivatives markets</li>
+          <li style="display: list-item; margin-bottom: 0.25rem;">Applied sophisticated feature engineering techniques to extract predictive variables</li>
+          <li style="display: list-item; margin-bottom: 0.25rem;">Implemented robust data validation and outlier detection procedures</li>
+        </ul>
+        
+        <div class="project-subsection-title" style="font-weight: bold; text-decoration: underline;"><strong><u>Model Architecture</u></strong></div>
+        <div class="project-content">The LSTM model incorporates a multi-layered architecture designed for sequential volatility prediction with input sequence windows, dropout regularization, and SHAP analysis for interpretability.</div>
+        
+        {{ if .Params.core_predictors }}
+          <div class="project-section-title">Core Predictors</div>
+          <ul style="list-style-type: disc; list-style-position: inside; padding-left: 1rem; margin: 0.5rem 0;">
+            {{ range .Params.core_predictors }}
+              <li style="display: list-item; margin-bottom: 0.25rem;"><strong>{{ .name }}:</strong> {{ .description }}</li>
+            {{ end }}
+          </ul>
+        {{ end }}
+        
+        {{ if .Params.academic_contributions }}
+          <div class="project-section-title">Academic Contributions</div>
+          <ul style="list-style-type: disc; list-style-position: inside; padding-left: 1rem; margin: 0.5rem 0;">
+            {{ range .Params.academic_contributions }}
+              <li style="display: list-item; margin-bottom: 0.25rem;">{{ . }}</li>
+            {{ end }}
+          </ul>
+        {{ end }}
+        
         {{ with .Params.objectives }}
           <div class="project-section-title">Objectives</div>
-          <ul class="project-objectives">
-            {{ range . }}<li>{{ . }}</li>{{ end }}
+          <ul style="list-style-type: disc; list-style-position: inside; padding-left: 1rem; margin: 0.5rem 0;">
+            {{ range . }}<li style="display: list-item; margin-bottom: 0.25rem;">{{ . }}</li>{{ end }}
           </ul>
         {{ end }}
         {{ with .Params.technologies }}<div class="project-section-title">Technologies Used</div><div class="project-technologies">{{ . }}</div>{{ end }}
@@ -30,10 +69,15 @@
           <button class="project-github disabled" disabled>GitHub link soon</button>
         {{ end }}
         <!-- No carousel for thesis -->
+        </div>
       </div>
     {{ end }}
     {{ range $credit }}
-      <div class="project-box">
+      <div style="display:flex;flex-direction:row;align-items:center;width:100%;">
+        <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;margin-right:4px;">
+          <span style="writing-mode:vertical-rl;transform:rotate(180deg);font-size:0.9em;color:#6b7280;letter-spacing:2px;">← Scroll</span>
+        </div>
+        <div class="project-box" style="flex:1; position: relative;">
         <h2 class="project-title">{{ .Title }}</h2>
         <span class="project-status">{{ .Params.status }}</span>
         {{ with .Params.subtitle }}<div class="project-subtitle">{{ . }}</div>{{ end }}
@@ -52,10 +96,15 @@
           <a href="{{ . }}" target="_blank" class="project-github">GitHub</a>
         {{ end }}
   <div style="width:100%;margin-top:16px;">{{ .Content }}</div>
+        </div>
       </div>
     {{ end }}
     {{ range $vpoc }}
-      <div class="project-box">
+      <div style="display:flex;flex-direction:row;align-items:center;width:100%;">
+        <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;margin-right:4px;">
+          <span style="writing-mode:vertical-rl;transform:rotate(180deg);font-size:0.9em;color:#6b7280;letter-spacing:2px;">← Scroll</span>
+        </div>
+        <div class="project-box" style="flex:1; position: relative;">
         <h2 class="project-title">{{ .Title }}</h2>
         <span class="project-status">{{ .Params.status }}</span>
         {{ with .Params.subtitle }}<div class="project-subtitle">{{ . }}</div>{{ end }}
@@ -71,6 +120,7 @@
           <a href="{{ . }}" target="_blank" class="project-github">GitHub</a>
         {{ end }}
   <div style="width:100%;margin-top:16px;">{{ .Content }}</div>
+        </div>
       </div>
     {{ end }}
   </div>
