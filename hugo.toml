@@ -10,17 +10,24 @@
 		name = "Projects"
 		url = "/projects/"
 		weight = 2
-baseURL = 'https://example.org/'
+
+baseURL = 'https://www.principles0s.com/'
 languageCode = 'en-us'
-title = 'Lukas Rueda'
+title = 'Lukas Rueda | Economist & Risk Analyst'
 theme = "hello-friend-ng"
+
+enableRobotsTXT = true
+
 [taxonomies]
 	tag = "tags"
 	category = "categories"
 
 [params]
-	homeSubtitle = "Hi, I'm Lukas. Welcome to my personal portfolio site! I am a passionate product manager and data analyst. This site showcases my background, experience, and projects. Feel free to explore and learn more about me and my work."
-	customCSS = ["css/custom.css", "css/tailwind.css"]
+	description = "Quantitative Economist and Researcher specializing in econometric modeling, time-series forecasting, and statistical analysis. M.A. Economics candidate at Hunter College with expertise in financial econometrics, volatility modeling, and risk assessment."
+	keywords = ["economist", "risk analyst", "econometrics", "financial modeling", "volatility forecasting", "time-series analysis", "Hunter College", "quantitative research", "portfolio analysis"]
+	homeSubtitle = "Quantitative Economist specializing in financial econometrics, time-series analysis, and machine learning for volatility forecasting."
+	customCSS = ["css/custom.css", "css/tailwind.css", "css/mobile.css"]
+	googleAnalytics = "G-XXXXXXXXXX"
 
 	[[params.social]]
 		name = "github"
@@ -30,9 +37,20 @@ theme = "hello-friend-ng"
 		url = "https://www.linkedin.com/in/lukas-r-15769637a"
 	[[params.social]]
 		name = "email"
-		url = "mailto:lrud1314@pm.me"
+		url = "mailto:principles0s@pm.me"
 
 [markup]
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true
+
+[sitemap]
+	changefreq = "weekly"
+	filename = "sitemap.xml"
+	priority = 0.5
+
+[minify]
+	disableCSS = false
+	disableHTML = false
+	disableJS = false
+	minifyOutput = true

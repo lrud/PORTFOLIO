@@ -1,0 +1,103 @@
+{{- /* Person Schema */ -}}
+{{ if .IsHome }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Lukas Rueda",
+  "url": "{{ .Site.BaseURL }}",
+  "image": "{{ .Site.BaseURL }}images/headshot.jpg",
+  "jobTitle": "Quantitative Economist & Risk Analyst",
+  "description": "{{ .Site.Params.description }}",
+  "email": "principles0s@pm.me",
+  "sameAs": [
+    "https://github.com/lrud",
+    "https://www.linkedin.com/in/lukas-r-15769637a"
+  ],
+  "alumniOf": [
+    {
+      "@type": "CollegeOrUniversity",
+      "name": "Hunter College",
+      "sameAs": "https://www.hunter.cuny.edu/"
+    },
+    {
+      "@type": "CollegeOrUniversity",
+      "name": "Skidmore College",
+      "sameAs": "https://www.skidmore.edu/"
+    }
+  ],
+  "knowsAbout": [
+    "Econometrics",
+    "Time-Series Analysis",
+    "Financial Economics",
+    "Volatility Modeling",
+    "Risk Management",
+    "Python",
+    "Machine Learning"
+  ]
+}
+</script>
+{{ end }}
+
+{{- /* ProfessionalService Schema for Tutoring */ -}}
+{{ if eq .RelPermalink "/about/" }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "Economics Tutoring Services",
+  "description": "Tutoring in Econometrics, Calculus, and Macroeconomics",
+  "url": "https://www.wyzant.com/Tutors/LukasR",
+  "provider": {
+    "@type": "Person",
+    "name": "Lukas Rueda"
+  },
+  "serviceType": "Tutoring",
+  "areaServed": {
+    "@type": "Country",
+    "name": "United States"
+  },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Tutoring Subjects",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Econometrics Tutoring"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Calculus Tutoring"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Macroeconomics Tutoring"
+        }
+      }
+    ]
+  }
+}
+</script>
+{{ end }}
+
+{{- /* WebSite Schema */ -}}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "{{ .Site.Title }}",
+  "url": "{{ .Site.BaseURL }}",
+  "author": {
+    "@type": "Person",
+    "name": "Lukas Rueda"
+  }
+}
+</script>

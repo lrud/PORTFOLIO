@@ -1,0 +1,202 @@
+/* Mobile Responsive Styles */
+
+/* Tablet breakpoint */
+@media (max-width: 1023px) {
+  .about-tiles-row {
+    flex-direction: column !important;
+    gap: 1.5em !important;
+  }
+  
+  .education-tile,
+  .experience-tile {
+    height: auto !important;
+    min-height: 300px !important;
+    max-height: none !important;
+  }
+  
+  .scroll-indicator {
+    display: none !important;
+  }
+}
+
+/* Mobile breakpoint */
+@media (max-width: 767px) {
+  /* Navigation */
+  .desktop-nav {
+    display: none !important;
+  }
+  
+  .nav-name {
+    position: relative !important;
+    left: auto !important;
+  }
+  
+  .nav-center {
+    background: transparent !important;
+    padding: 0 !important;
+    border: none !important;
+  }
+  
+  /* About Page */
+  .about-description {
+    max-width: 100% !important;
+    padding: 0 1rem !important;
+  }
+  
+  .about-me-tile {
+    padding: 1.5rem 1rem !important;
+  }
+  
+  .about-me-tile h2 {
+    font-size: 1.25em !important;
+  }
+  
+  .about-social-icons {
+    flex-wrap: wrap;
+    gap: 0.75rem !important;
+  }
+  
+  .about-social-icons a {
+    padding: 0.5rem 0.75rem !important;
+    font-size: 0.875rem !important;
+  }
+  
+  .about-tiles-row {
+    padding: 0 1rem !important;
+  }
+  
+  .education-tile,
+  .experience-tile {
+    padding: 1rem !important;
+  }
+  
+  .education-tile h2,
+  .experience-tile h2 {
+    font-size: 1.25em !important;
+  }
+  
+  /* Education & Experience items */
+  .education-tile > div > div,
+  .experience-tile > div > div {
+    padding: 0.5em 0.75em !important;
+  }
+  
+  .education-tile img,
+  .experience-tile img {
+    height: 24px !important;
+  }
+  
+  /* Experience list items */
+  .experience-tile ul {
+    padding-left: 1.25rem !important;
+    font-size: 0.875rem !important;
+  }
+  
+  /* Projects Page */
+  .projects-grid {
+    flex-direction: column !important;
+    padding: 0 1rem !important;
+  }
+  
+  .project-card {
+    max-width: 100% !important;
+    height: auto !important;
+    min-height: 400px !important;
+    max-height: none !important;
+  }
+  
+  .project-card-content {
+    padding: 1rem !important;
+  }
+  
+  .project-card h2 {
+    font-size: 1.125rem !important;
+  }
+  
+  /* Skills Section */
+  .skills-section {
+    padding: 1rem !important;
+  }
+  
+  .skills-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+  
+  /* Tutoring Section */
+  .tutoring-section {
+    padding: 1rem !important;
+    margin: 1rem 0 !important;
+  }
+  
+  .tutoring-section h3 {
+    font-size: 1.125rem !important;
+  }
+  
+  /* CV Download Button */
+  .cv-download-btn {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+  
+  /* Headshot */
+  .headshot-container {
+    width: 120px !important;
+    height: 120px !important;
+  }
+  
+  /* Job Availability Banner */
+  .job-availability {
+    padding: 0.75rem 1rem !important;
+    font-size: 0.875rem !important;
+  }
+  
+  /* Footer */
+  footer {
+    padding: 1.5rem 1rem !important;
+  }
+  
+  footer .footer-links {
+    flex-direction: column;
+    gap: 0.5rem !important;
+  }
+}
+
+/* Small mobile */
+@media (max-width: 479px) {
+  .about-me-tile h2 {
+    font-size: 1.125em !important;
+  }
+  
+  .about-social-icons a {
+    font-size: 0.8125rem !important;
+    padding: 0.5rem 0.625rem !important;
+  }
+  
+  .about-social-icons a svg {
+    width: 16px !important;
+    height: 16px !important;
+  }
+  
+  .education-tile h2,
+  .experience-tile h2 {
+    font-size: 1.125em !important;
+  }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .scroll-tile {
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .about-social-icons a:hover {
+    transform: none !important;
+    box-shadow: none !important;
+  }
+  
+  .mobile-nav-link:hover {
+    background-color: transparent;
+    color: var(--text-primary);
+  }
+}

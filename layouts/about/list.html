@@ -1,157 +1,608 @@
 {{ define "main" }}
 <style>
-.about-me-tile p {
-  margin-bottom: 1rem;
-  line-height: 1.6;
-  text-align: center;
+.about-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 1rem;
 }
 
-.about-me-tile p:last-of-type {
+.about-intro {
+  background: var(--bg-secondary);
+  border-radius: 1rem;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 
+    0 4px 6px rgba(0, 0, 0, 0.02),
+    0 12px 24px rgba(0, 0, 0, 0.06),
+    0 24px 48px rgba(0, 0, 0, 0.04);
+  border: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+  text-align: left;
+}
+
+.about-intro::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+}
+
+.about-intro p {
+  margin-bottom: 1rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+.about-header {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.headshot-container {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid var(--accent);
+  flex-shrink: 0;
+}
+
+.headshot-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.about-title-block h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 0.25rem 0;
+}
+
+.about-title-block p {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  margin: 0 0 0.75rem 0;
+}
+
+.resume-btn-container {
+  margin: 1rem 0;
+}
+
+.resume-btn-container a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.75rem;
+  background: rgba(0, 0, 0, 0.05);
+  border: 2px solid rgba(0, 0, 0, 0.15);
+  color: var(--text-primary);
+  text-decoration: none;
+  border-radius: 0.4rem;
+  font-weight: 600;
+  font-size: 0.75rem;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.2s ease;
+}
+
+.resume-btn-container a:hover {
+  background: rgba(0, 0, 0, 0.1);
+  transform: translateY(-1px);
+}
+
+.resume-btn-container a::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+  animation: shine 3s infinite;
+}
+
+@keyframes shine {
+  0% { left: -100%; }
+  15% { left: 100%; }
+  100% { left: 100%; }
+}
+
+[data-theme="dark"] .resume-btn-container a {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+[data-theme="dark"] .resume-btn-container a:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.about-intro hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 1.5rem 0;
+}
+
+.section-separator-strong {
+  border: none;
+  height: 2px;
+  background-color: var(--text-muted);
+  margin: 2rem 0;
+}
+
+.wyzant-btn-inline {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.5rem;
+  background: linear-gradient(135deg, #1ca035 0%, #15872b 100%);
+  color: white !important;
+  text-decoration: none !important;
+  border-radius: 0.25rem;
+  font-weight: 500;
+  font-size: 0.8em;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 6px rgba(28, 160, 53, 0.25);
+}
+
+.wyzant-btn-inline:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(28, 160, 53, 0.35);
+  color: white !important;
+}
+
+.wyzant-btn-inline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  animation: shine 3s infinite;
+}
+
+.about-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+  padding-top: 1rem;
+  justify-content: center;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1rem;
+  min-width: 110px;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  font-size: 0.875rem;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  border: 2px solid transparent;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn-github {
+  background: #24292e;
+  color: white;
+  border-color: #24292e;
+}
+
+.btn-linkedin {
+  background: #0077b5;
+  color: white;
+  border-color: #0077b5;
+}
+
+.btn-email {
+  background: #dc2626;
+  color: white;
+  border-color: #dc2626;
+}
+
+.tiles-row {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.tile-outer {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.scroll-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-right: 8px;
+  gap: 4px;
+}
+
+.scroll-indicator span {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  letter-spacing: 2px;
+}
+
+.scroll-indicator .arrow {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}
+
+.tile {
+  flex: 1;
+  background: var(--bg-secondary);
+  border-radius: 1rem;
+  padding: 1.5rem 1rem;
+  box-shadow: 
+    0 4px 6px rgba(0, 0, 0, 0.02),
+    0 12px 24px rgba(0, 0, 0, 0.06),
+    0 24px 48px rgba(0, 0, 0, 0.04);
+  border: 1px solid var(--border);
+  height: 400px;
+  max-height: 400px;
+  overflow-y: auto;
+  position: relative;
+}
+
+.tile::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+}
+
+.tile h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0 0 1rem 0;
+  text-align: center;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--border);
+}
+
+.tile h2.education-title {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+.tile h2.experience-title {
+  color: var(--success);
+  border-bottom-color: var(--success);
+}
+
+.edu-item, .exp-item {
+  background: var(--bg-tertiary);
+  border-radius: 0.5rem;
+  padding: 0.875rem 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.edu-item:last-child, .exp-item:last-child {
   margin-bottom: 0;
+}
+
+.edu-item .title {
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.edu-item .title img {
+  height: 24px;
+  width: auto;
+}
+
+.edu-item .school {
+  color: var(--accent);
+  font-size: 0.9rem;
+}
+
+.edu-item .date {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
+}
+
+.exp-item .header {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.exp-item .date-range {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+.exp-item ul {
+  margin: 0.5rem 0 0 0;
+  padding-left: 1.25rem;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  list-style-type: disc;
+}
+
+.exp-item li {
+  margin-bottom: 0.35rem;
+  padding-left: 0.25rem;
+}
+
+.research-tile {
+  background: var(--bg-secondary);
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 
+    0 4px 6px rgba(0, 0, 0, 0.02),
+    0 12px 24px rgba(0, 0, 0, 0.06),
+    0 24px 48px rgba(0, 0, 0, 0.04);
+  border: 1px solid var(--border);
+  position: relative;
+}
+
+.research-tile::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+}
+
+.research-tile h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--text-primary);
+  margin: 0 0 1.5rem 0;
+  text-align: center;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--accent);
+}
+
+.research-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.research-item {
+  padding: 1rem;
+  background: var(--bg-tertiary);
+  border-radius: 0.75rem;
+  border-left: 3px solid var(--accent);
+}
+
+.research-item h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 0.5rem 0;
+}
+
+.research-item p {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: 1.5;
+}
+
+@media (max-width: 767px) {
+  .about-header {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .about-title-block h1 {
+    font-size: 1.75rem;
+  }
+  
+  .tiles-row {
+    flex-direction: column;
+  }
+  
+  .scroll-indicator {
+    display: none;
+  }
+  
+  .tile {
+    height: auto;
+    max-height: none;
+  }
+  
+  .research-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .about-buttons {
+    justify-content: center;
+  }
 }
 </style>
 
-<main class="main-content" style="display: flex; flex-direction: column; align-items: center; justify-content: flex-start; min-height: 80vh;">
-  <!-- Centered About Section -->
-  <!-- About Me Tile -->
-  <div class="about-description" style="max-width:600px;margin:0 auto 2em auto;text-align:center;">
-    <div class="about-me-tile" style="background: #fff; border-radius: 1em; box-shadow: 0 2px 12px rgba(0,0,0,0.07); padding: 1em 1em 1em 1em; border: 1px solid #e5e7eb; display: flex; flex-direction: column; align-items: center;">
-  <h2 style="font-size:1.5em;font-weight:bold;color:#111827;margin-top:0;margin-bottom:0;">About Me</h2>
-  {{ .Content }}
-      <div class="about-social-icons" style="margin-top: 1.5em; display: flex; justify-content: center; gap: 1.5rem;">
-        {{ range .Site.Params.social }}
-          {{ if eq .name "github" }}
-            <a href="{{ .url }}" target="_blank" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1rem; background-color: #24292e; color: white; text-decoration: none; border-radius: 0.5rem; font-weight: 500; transition: all 0.2s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(36, 41, 46, 0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
-              <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-              GitHub
-            </a>
-          {{ else if eq .name "linkedin" }}
-            <a href="{{ .url }}" target="_blank" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1rem; background-color: #0077b5; color: white; text-decoration: none; border-radius: 0.5rem; font-weight: 500; transition: all 0.2s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(0, 119, 181, 0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
-              <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-              LinkedIn
-            </a>
-          {{ else if eq .name "email" }}
-            <a href="{{ .url }}" target="_blank" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1rem; background-color: #dc2626; color: white; text-decoration: none; border-radius: 0.5rem; font-weight: 500; transition: all 0.2s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(220, 38, 38, 0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
-              <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-.904.732-1.636 1.636-1.636h1.818l8.546 6.409 8.546-6.41h1.818c.904.001 1.636.733 1.636 1.637z"/></svg>
-              Email
-            </a>
-          {{ end }}
-        {{ end }}
+<main style="min-height: 80vh; padding: 2rem 0; background: var(--bg-primary);">
+  <div class="about-container">
+    
+    <!-- Main About Tile -->
+    <div class="about-intro">
+      <div class="about-header">
+        <div class="headshot-container">
+          <img src="/images/headshot.jpg" alt="Lukas Rueda" onerror="this.parentElement.style.display='none'">
+        </div>
+      <div class="about-title-block">
+          <h1>Lukas Rueda</h1>
+          <p style="margin-bottom: 0;">Quantitative Economist & Risk Analyst</p>
+        </div>
+      </div>
+      
+      <div class="resume-btn-container">
+        <a href="/images/Lukas_Rueda_Resume.docx" download>
+          <svg width="12" height="12" fill="currentColor" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+          Resume
+        </a>
+      </div>
+      
+      {{ .Content }}
+      
+      <hr class="section-separator-strong">
+      
+      <p style="text-align: left; font-size: 0.8rem; font-weight: 600; color: var(--text-muted); margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em;">Tutoring Services</p>
+      
+      <p style="color: var(--text-secondary); line-height: 1.7; margin-bottom: 1rem;">
+        I offer private tutoring in <strong>Econometrics</strong>, <strong>Calculus</strong>, and <strong>Macroeconomics</strong> through Wyzant. I tutor undergraduate students in econometrics and macroeconomics, helping them master OLS estimation, time-series analysis, and statistical modeling.
+      </p>
+      <div style="margin-bottom: 0.5rem;">
+        <a href="https://www.wyzant.com/Tutors/LukasR" target="_blank" rel="noopener" class="wyzant-btn-inline"><svg width="12" height="12" fill="currentColor" viewBox="0 0 24 24" style="display:inline;vertical-align:middle;margin-right:4px;"><path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/></svg>Book a session on Wyzant</a>
+      </div>
+      
+      <div style="width: 100%; text-align: center; margin-top: 1rem; margin-bottom: 0.5rem;">
+        <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em;">Get in Touch</span>
+      </div>
+      
+      <div class="about-buttons">
+        <a href="https://github.com/lrud" target="_blank" rel="noopener" class="btn btn-github">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+          GitHub
+        </a>
+        <a href="https://www.linkedin.com/in/lukas-r-15769637a" target="_blank" rel="noopener" class="btn btn-linkedin">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          LinkedIn
+        </a>
+        <a href="mailto:principles0s@pm.me" class="btn btn-email">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-.904.732-1.636 1.636-1.636h1.818l8.546 6.409 8.546-6.41h1.818c.904.001 1.636.733 1.636 1.637z"/></svg>
+          Email
+        </a>
       </div>
     </div>
-  </div>
-  <!-- Education & Experience Tiles Row -->
-  <div class="about-tiles-row" style="display: flex; flex-direction: row; justify-content: center; align-items: stretch; gap: 2em; width: 100%; max-width: 900px;">
-    <!-- Education Tile -->
-    <div style="display:flex;flex-direction:row;align-items:center;width:100%;">
-      <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;margin-right:4px;">
-  <span style="writing-mode:vertical-rl;transform:rotate(180deg);font-size:0.9em;color:#6b7280;letter-spacing:2px;">← Scroll</span>
-      </div>
-      <div class="education-tile scroll-tile" style="flex:1; background: #fff; border-radius: 1em; box-shadow: 0 2px 12px rgba(0,0,0,0.07); padding: 1em 1em 1em 1em; border: 1px solid #e5e7eb; display: flex; flex-direction: column; align-items: center; height: 400px; min-height: 400px; max-height: 400px; overflow-y: auto; position: relative;">
-  <h2 style="font-size:1.5em;font-weight:bold;color:#2563eb;margin-top:0;margin-bottom:0;">Education</h2>
-  <div style="width:100%;display:flex;flex-direction:column;gap:0.5em;">
-      </div>
-  <!-- removed scroll arrow at top of tile -->
-  <div style="background:#f3f4f6;border-radius:0.5em;padding:0.3em 1em;text-align:left;width:100%;box-sizing:border-box;margin-bottom:0.7em;">
-          <div style="font-weight:bold;color:#111827;text-align:left;width:100%;">
-            <img src="/images/Hunter_college_logo.png" alt="Hunter College Logo" style="height:32px;width:auto;vertical-align:middle;margin-right:8px;"> Master of Arts, Economics
-          </div>
-          <div style="color:#2563eb;text-align:left;width:100%;">
-            Hunter College, New York, NY
-          </div>
-          <div style="color:#6b7280;font-size:0.95em;text-align:left;width:100%;">2024 &ndash; Expected Fall 2025</div>
+    
+    <!-- Education & Experience Row -->
+    <div class="tiles-row">
+      <div class="tile-outer">
+        <div class="scroll-indicator">
+          <span>Scroll</span>
+          <span class="arrow">←</span>
         </div>
-  <div style="background:#f3f4f6;border-radius:0.5em;padding:0.3em 1em;text-align:left;width:100%;box-sizing:border-box;margin-bottom:0.7em;">
-          <div style="font-weight:bold;color:#111827;text-align:left;width:100%;">
-            <img src="/images/blacksquare-logo.jpg" alt="Brainstation Logo" style="height:40px;width:auto;vertical-align:middle;margin-right:10px;"> Data Science Bootcamp
+        <div class="tile">
+          <h2 class="education-title">Education</h2>
+          <div class="edu-item">
+            <div class="title">
+              <img src="/images/Hunter_college_logo.png" alt="Hunter">
+              M.A., Economics (STEM)
+            </div>
+            <div class="school">Hunter College, New York, NY</div>
+            <div class="date">Jan 2025 – Dec 2026 | GPA: 3.67</div>
           </div>
-          <div style="color:#2563eb;text-align:left;width:100%;">
-            Brainstation, New York, NY
+          <div class="edu-item">
+            <div class="title">
+              <img src="/images/blacksquare-logo.jpg" alt="Brainstation">
+              Data Science Bootcamp
+            </div>
+            <div class="school">Brainstation, New York, NY</div>
+            <div class="date">2019</div>
           </div>
-          <div style="color:#6b7280;font-size:0.95em;text-align:left;width:100%;">2019</div>
-        </div>
-  <div style="background:#f3f4f6;border-radius:0.5em;padding:0.3em 1em;text-align:left;width:100%;box-sizing:border-box;margin-bottom:0.7em;">
-          <div style="font-weight:bold;color:#111827;text-align:left;width:100%;">
-            <img src="/images/cff7c5c5feced5a305ed9997587cf5ef.png" alt="Skidmore College Logo" style="height:40px;width:auto;vertical-align:middle;margin-right:10px;"> Bachelor of Science, Mathematics
+          <div class="edu-item">
+            <div class="title">
+              <img src="/images/cff7c5c5feced5a305ed9997587cf5ef.png" alt="Skidmore">
+              B.S., Mathematics
+            </div>
+            <div class="school">Skidmore College, Saratoga Springs, NY</div>
+            <div class="date">2014 – 2018 | GPA: 3.81</div>
           </div>
-          <div style="color:#2563eb;text-align:left;width:100%;">
-            Skidmore College, Saratoga Springs, NY
-          </div>
-          <div style="color:#6b7280;font-size:0.95em;text-align:left;width:100%;">2014 &ndash; 2018</div>
         </div>
       </div>
-    </div>
-    <!-- Experience Tile -->
-    <div style="display:flex;flex-direction:row;align-items:center;width:100%;">
-      <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;margin-right:4px;">
-  <span style="writing-mode:vertical-rl;transform:rotate(180deg);font-size:0.9em;color:#6b7280;letter-spacing:2px;">← Scroll</span>
-      </div>
-      <div class="experience-tile scroll-tile" style="flex:1; background: #fff; border-radius: 1em; box-shadow: 0 2px 12px rgba(0,0,0,0.07); padding: 1em 1em 1em 1em; border: 1px solid #e5e7eb; display: flex; flex-direction: column; align-items: center; height: 400px; min-height: 400px; max-height: 400px; overflow-y: auto; position: relative;">
-  <h2 style="font-size:1.5em;font-weight:bold;color:#059669;margin-top:0;margin-bottom:0;">Experience</h2>
-  <div style="width:100%;display:flex;flex-direction:column;gap:0.5em;">
-      </div>
-  <!-- removed scroll arrow at top of tile -->
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  document.querySelectorAll('.scroll-tile').forEach(function(tile) {
-    var arrow = tile.querySelector('.scroll-arrow');
-    function updateArrow() {
-      if (tile.scrollHeight > tile.clientHeight && tile.scrollTop + tile.clientHeight < tile.scrollHeight - 2) {
-        arrow.style.display = 'block';
-      } else {
-        arrow.style.display = 'none';
-      }
-    }
-    tile.addEventListener('scroll', updateArrow);
-    updateArrow();
-    window.addEventListener('resize', updateArrow);
-  });
-});
-</script>
-        <div style="margin-bottom:0.5em;">
-          <span style="font-weight:bold;color:#111827;">Economics Tutor</span> | Hunter College | New York, NY <br>
-          <span style="color:#6b7280;">Aug 2024 – Present</span>
-          <ul style="color:#4b5563;font-size:0.95em;list-style-type:disc;list-style-position:outside;padding-left:1.5rem;margin:0.5rem 0;">
-            <li>Taught undergraduate econometrics and communicated complex statistical concepts to non-technical students</li>
-            <li>Developed curriculum on linear regression, time-series analysis, and model validation techniques</li>
-          </ul>
+      
+      <div class="tile-outer">
+        <div class="scroll-indicator">
+          <span>Scroll</span>
+          <span class="arrow">←</span>
         </div>
-        <div style="margin-bottom:0.5em;">
-          <span style="font-weight:bold;color:#111827;">Independent Futures Trader</span> | Principles of Sovereignty LLC | Brooklyn, NY <br>
-          <span style="color:#6b7280;">Jan 2021 – Aug 2024</span>
-          <ul style="color:#4b5563;font-size:0.95em;list-style-type:disc;list-style-position:outside;padding-left:1.5rem;margin:0.5rem 0;">
-            <li>Conducted discretionary trading of broad market index futures using volume profile analysis and technical indicators</li>
-            <li>Achieved 13% average annual returns on high-frequency (2000 tick) charts</li>
-            <li>Performed comprehensive macroeconomic analysis incorporating Federal Reserve communications and economic data releases</li>
-          </ul>
-        </div>
-        <div style="margin-bottom:0.5em;">
-          <span style="font-weight:bold;color:#111827;">Product Manager</span> | OpenSponsorship | New York, NY <br>
-          <span style="color:#6b7280;">July 2020 – Dec 2020</span>
-          <ul style="color:#4b5563;font-size:0.95em;list-style-type:disc;list-style-position:outside;padding-left:1.5rem;margin:0.5rem 0;">
-            <li>Managed cross-functional project coordination across engineering and design teams</li>
-            <li>Conducted customer interviews to identify platform usability issues</li>
-            <li>Designed A/B tests to validate feature improvements and measure user engagement</li>
-          </ul>
-        </div>
-        <div style="margin-bottom:0.5em;">
-          <span style="font-weight:bold;color:#111827;">Junior Product Manager</span> | ObsessVR | New York, NY <br>
-          <span style="color:#6b7280;">Jan 2020 – July 2020</span>
-          <ul style="color:#4b5563;font-size:0.95em;list-style-type:disc;list-style-position:outside;padding-left:1.5rem;margin:0.5rem 0;">
-            <li>Developed internal analytics GUI translating technical requirements into user-friendly interfaces</li>
-            <li>Improved team efficiency by 75% through streamlined data visualization tools</li>
-          </ul>
-        </div>
-        <div style="margin-bottom:0.5em;">
-          <span style="font-weight:bold;color:#111827;">Technical Project Manager</span> | GUESST | New York, NY <br>
-          <span style="color:#6b7280;">Nov 2018 – Jan 2020</span>
-          <ul style="color:#4b5563;font-size:0.95em;list-style-type:disc;list-style-position:outside;padding-left:1.5rem;margin:0.5rem 0;">
-            <li>Coordinated UI/UX platform overhaul between technical teams and stakeholders</li>
-            <li>Improved user satisfaction through enhanced platform design and functionality</li>
-          </ul>
+        <div class="tile">
+          <h2 class="experience-title">Experience</h2>
+          <div class="exp-item">
+            <div class="header">Economics Tutor | Hunter College</div>
+            <div class="date-range">Jan 2025 – Dec 2026</div>
+            <ul>
+              <li>Tutored undergraduate students in complex econometric and statistical concepts, improving their analytical reasoning and problem-solving skills in quantitative economics</li>
+            </ul>
+          </div>
+          <div class="exp-item">
+            <div class="header">Trader & Financial Analyst | Principles of Sovereignty LLC</div>
+            <div class="date-range">Jan 2021 – Aug 2024</div>
+            <ul>
+              <li>Performed rigorous analysis of on-chain data and protocol infrastructure to inform discretionary investment theses for Bitcoin options and broad market index futures</li>
+              <li>Actively managed a portfolio of complex financial derivatives, gaining hands-on experience in portfolio construction and risk management</li>
+            </ul>
+          </div>
+          <div class="exp-item">
+            <div class="header">Junior Product Manager | ObsessVR</div>
+            <div class="date-range">Jan 2020 – Jan 2021</div>
+            <ul>
+              <li>Championed development of a critical internal GUI, translating complex operational workflow into an elegant product solution that enhanced efficiency by 75%</li>
+              <li>Wrote detailed technical PRDs to guide engineering team through product development lifecycle</li>
+            </ul>
+          </div>
+          <div class="exp-item">
+            <div class="header">Technical Project Manager | GUESST</div>
+            <div class="date-range">Nov 2018 – Jan 2020</div>
+            <ul>
+              <li>Spearheaded complete UI/UX overhaul of platform's core service, collaborating with cross-functional teams to replace manual process with intuitive interface</li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
+    
+    <!-- Research Interests Section -->
+    <div class="research-tile">
+      <h2>Research Interests</h2>
+      <div class="research-grid">
+        <div class="research-item">
+          <h3>Tail Risk Investing</h3>
+          <p>Investigating tail risk hedging strategies for Bitcoin and digital assets, examining how options-based approaches can protect against extreme drawdowns in cryptocurrency portfolios.</p>
+        </div>
+        <div class="research-item">
+          <h3>Commodities Pricing</h3>
+          <p>Modeling crude oil prices as a function of geopolitical risk indicators, incorporating sanctions, OPEC decisions, and supply disruption events into quantitative pricing frameworks.</p>
+        </div>
+        <div class="research-item">
+          <h3>Macroeconomic Research</h3>
+          <p>Analyzing the interlinked dynamics of CPI, GDP growth, global trade flows, and energy markets to build unified forecasting models that capture cross-market spillover effects.</p>
+        </div>
+        <div class="research-item">
+          <h3>Prediction Market Modeling</h3>
+          <p>Developing QRF-Bias models to identify and exploit systematic biases in weather prediction markets, applying quantile regression forests to calibrate probabilistic forecasts against market prices.</p>
+        </div>
+      </div>
+    </div>
+    
   </div>
 </main>
 {{ end }}

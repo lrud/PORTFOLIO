@@ -1,18 +1,208 @@
 @import url("status-flag.css");
 
-/* ...existing code... */
+/* ============================================
+   CSS Variables - Dark Theme (Default)
+   ============================================ */
+:root,
+[data-theme="dark"] {
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --bg-tertiary: #334155;
+  --text-primary: #f1f5f9;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+  --accent: #3b82f6;
+  --accent-hover: #60a5fa;
+  --success: #10b981;
+  --warning: #f59e0b;
+  --error: #ef4444;
+  --border: #475569;
+  --shadow: rgba(0, 0, 0, 0.35);
+  --shadow-lg: rgba(0, 0, 0, 0.5);
+}
+
+/* ============================================
+   CSS Variables - Light Theme
+   ============================================ */
+[data-theme="light"] {
+  --bg-primary: #f9fafb;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #f3f4f6;
+  --text-primary: #111827;
+  --text-secondary: #4b5563;
+  --text-muted: #6b7280;
+  --accent: #2563eb;
+  --accent-hover: #1d4ed8;
+  --success: #059669;
+  --warning: #d97706;
+  --error: #dc2626;
+  --border: #e5e7eb;
+  --shadow: rgba(0, 0, 0, 0.08);
+  --shadow-lg: rgba(0, 0, 0, 0.12);
+}
+
+/* ============================================
+   Base Styles
+   ============================================ */
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ============================================
+   Navigation
+   ============================================ */
+nav {
+  background-color: var(--bg-secondary) !important;
+  border-bottom: 1px solid var(--border) !important;
+  box-shadow: 0 2px 8px var(--shadow-lg) !important;
+}
+
+nav a {
+  color: var(--text-primary) !important;
+}
+
+.nav-center {
+  background-color: var(--bg-tertiary);
+  border-color: var(--border);
+}
+
+/* ============================================
+   Cards & Tiles
+   ============================================ */
+.about-me-tile,
+.education-tile,
+.experience-tile,
+.project-card,
+.skills-section,
+.tutoring-section {
+  background-color: var(--bg-secondary) !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: 0 2px 12px var(--shadow) !important;
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about-me-tile h2,
+.education-tile h2,
+.experience-tile h2 {
+  color: var(--text-primary) !important;
+}
+
+/* Education/Experience inner items */
+.education-tile > div > div,
+.experience-tile > div > div {
+  background-color: var(--bg-tertiary) !important;
+  transition: background-color 0.3s ease;
+}
+
+/* ============================================
+   Text Colors
+   ============================================ */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-primary);
+}
+
+p {
+  color: var(--text-secondary);
+}
+
+/* ============================================
+   Links
+   ============================================ */
+a {
+  color: var(--accent);
+}
+
+a:hover {
+  color: var(--accent-hover);
+}
 
 a.github-link {
-  color: #1976d2;
+  color: var(--accent);
   font-weight: 600;
   text-decoration: underline;
 }
 
-/* Thesis content styles */
+/* ============================================
+   Buttons
+   ============================================ */
+.btn-primary {
+  background-color: var(--accent);
+  color: white;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.btn-primary:hover {
+  background-color: var(--accent-hover);
+  transform: translateY(-2px);
+}
+
+/* ============================================
+   Footer
+   ============================================ */
+footer {
+  background-color: var(--bg-secondary) !important;
+  border-top: 1px solid var(--border) !important;
+  color: var(--text-secondary);
+}
+
+footer a {
+  color: var(--text-muted) !important;
+}
+
+footer a:hover {
+  color: var(--accent) !important;
+}
+
+/* ============================================
+   Job Availability Banner
+   ============================================ */
+.job-availability {
+  background-color: var(--bg-tertiary);
+  border: 1px solid var(--accent);
+  color: var(--text-primary);
+}
+
+/* ============================================
+   Skills Section
+   ============================================ */
+.skills-category h4 {
+  color: var(--accent);
+  border-bottom: 1px solid var(--border);
+}
+
+.skill-tag {
+  background-color: var(--bg-tertiary);
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+  transition: all 0.2s ease;
+}
+
+.skill-tag:hover {
+  background-color: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+
+/* ============================================
+   Tutoring Section
+   ============================================ */
+.tutoring-section {
+  border-left: 4px solid var(--success);
+}
+
+.tutoring-section h3 {
+  color: var(--success);
+}
+
+/* ============================================
+   Project Content Styles
+   ============================================ */
 .project-content {
   font-size: 0.875rem;
   line-height: 1.6;
-  color: #374151;
+  color: var(--text-secondary);
   margin-bottom: 1rem;
 }
 
@@ -21,7 +211,7 @@ a.github-link {
   font-weight: 500;
   margin-bottom: 0.5rem;
   margin-top: 0.75rem;
-  color: #374151;
+  color: var(--text-primary);
 }
 
 .project-objectives {
@@ -35,4 +225,97 @@ a.github-link {
   list-style-type: disc !important;
   display: list-item !important;
   margin-bottom: 0.25rem !important;
+  color: var(--text-secondary);
+}
+
+/* ============================================
+   Headshot
+   ============================================ */
+.headshot-container {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid var(--accent);
+  box-shadow: 0 4px 12px var(--shadow-lg);
+  margin-bottom: 1rem;
+}
+
+.headshot-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ============================================
+   CV Download Button
+   ============================================ */
+.cv-download-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  background-color: var(--success);
+  color: white;
+  text-decoration: none;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.cv-download-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(5, 150, 105, 0.3);
+  color: white;
+}
+
+/* ============================================
+   Wyzant Button
+   ============================================ */
+.wyzant-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  background-color: #1ca035;
+  color: white;
+  text-decoration: none;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.wyzant-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(28, 160, 53, 0.3);
+  color: white;
+}
+
+/* ============================================
+   Scrollbar Styling
+   ============================================ */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-tertiary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--text-muted);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+
+/* ============================================
+   Selection
+   ============================================ */
+::selection {
+  background-color: var(--accent);
+  color: white;
 }

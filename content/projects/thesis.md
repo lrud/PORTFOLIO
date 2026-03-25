@@ -1,102 +1,86 @@
 ---
 title: "LSTM Forecasting of Bitcoin Implied Volatility (DVOL)"
-status: "🟦 In Progress"
-subtitle: "Master's Thesis – Economics"
-overview: "This research develops and evaluates a parsimonious LSTM model to forecast next-day Bitcoin implied volatility using academically justified on-chain and derivatives-market features. The study addresses a critical gap in cryptocurrency derivatives literature by combining traditional volatility modeling with blockchain-specific metrics, validated through both statistical accuracy and economic significance via delta-neutral trading strategies."
-research_objective: "Develop and evaluate a parsimonious LSTM model to forecast next-day Bitcoin implied volatility (DVOL) using academically justified on-chain and derivatives-market features, validated by both statistical accuracy and economic significance."
-dependent_variable:
-  name: "DVOL (Deribit 30-day Implied Volatility Index)"
-  period: "June 2021–present (~1,500 observations)"
-  source: "Daily observations from Deribit exchange"
+status: "🟦 Writing Phase"
+subtitle: "Master's Thesis – Economics (STEM Designated)"
+github_url: "https://github.com/lrud/THESIS"
+overview: "This thesis develops and validates a Long Short-Term Memory (LSTM) neural network model for forecasting Bitcoin implied volatility (DVOL), the Deribit 30-day volatility index. Using a unified framework of 17 models (13 linear/tree baselines + 4 LSTM variants), we demonstrate that LSTM models achieve competitive performance (R² = 0.9287) when properly evaluated."
+research_objective: "Develop an LSTM neural network model to forecast Bitcoin implied volatility (DVOL) using on-chain metrics and historical volatility patterns, validated through statistical analysis and economic significance."
+key_findings:
+  - "LSTM with lagged volatility features achieves R² = 0.9287, competitive with best linear/tree models"
+  - "41,055 hourly samples with 17-model comparison framework"
+  - "Lagged volatility features alone achieve near-optimal performance (7 features)"
+  - "All models achieve ~50% directional accuracy - hourly DVOL direction is fundamentally unpredictable"
+  - "VaR backtesting passes 95%/99% Kupiec tests - model does not underestimate tail risk"
+dataset:
+  name: "v1.6_final"
+  samples: "41,055 hourly records"
+  period: "April 23, 2021 – December 28, 2025"
+  jumps: "236 Lee-Mykland jumps (0.57%) using standard Gumbel threshold"
 core_predictors:
   - name: "Lagged DVOL"
-    description: "1-day, 7-day, and 30-day lags"
-    justification: "Lagged implied volatility explains 25% of future variance (Fleming et al. 2001); daily autocorrelation ρ ≈ 0.80; boosts HAR-RV R² by 10–15%"
+    description: "1-day, 7-day, 30-day lags"
   - name: "Transaction Volume (USD)"
     description: "Daily on-chain transaction volume"
-    source: "Bitcoin Researcher's Lab API"
-    justification: "Sequential information arrival causality with 89.02% rejection of no-causality null at 200-day window; strong volume→volatility Granger causality"
   - name: "Active Addresses Count"
     description: "Daily count of active Bitcoin addresses"
-    source: "Bitcoin Researcher's Lab API"
-    justification: "Negative relationship with volatility (–3.96% to –5.88% address decrease per 10% volatility increase), significant at 1% level"
   - name: "Network Value to Realized Value (NVRV)"
-    description: "Market value/realized value (on-chain UTXO cost basis)"
-    justification: "Strongest correlation with BTC price among on-chain metrics; profitable trading performance with Sharpe 0.41; true holder profit/loss proxy"
-  - name: "DVOL–RV Spread (Volatility Risk Premium)"
-    description: "DVOL_t – 30-day realized volatility"
-    justification: "Variance risk premium explains 15–20% of future variance; cross-sectional R² up to 30%; reduces HAR-RV RMSE by 10–12%"
+    description: "Market value/realized value ratio"
+  - name: "DVOL-RV Spread"
+    description: "Volatility risk premium (DVOL - 30-day realized volatility)"
 model_architecture:
-  framework: "LSTM neural network with input sequence windows"
-  features: "Moving averages, differenced series, and regime indicators"
-  regularization: "Dropout layers and L2 penalties to mitigate overfitting"
-  interpretability: "SHAP analysis for feature importance and dynamic driver identification"
+  type: "LSTM neural network"
+  hidden_size: 512
+  num_layers: 7
+  parameters: "13.8M"
+  regularization: "Dropout 0.5, L2 penalty 1e-4"
+  normalization: "720-hour rolling window"
+results:
+  r_squared: 0.9287
+  rmse: 1.71
+  mae: 1.28
+  directional_accuracy: "50.1%"
 benchmarks:
-  statistical_metrics: "MAPE, RMSE, directional accuracy"
-  baseline_models:
-    - "HAR-RV models"
-    - "GARCH (EGARCH) models"
-    - "Naïve lag models (DVOL autoregression)"
-  economic_validation:
-    strategy: "Delta-neutral straddle strategy with transaction costs"
-    metrics: "Sharpe ratio, maximum drawdown, P&L comparison"
-    regime_analysis: "High vs. low DVOL–RV spread regimes"
-academic_contributions:
-  - "Developing novel hybrid model combining LSTM neural networks with Bitcoin volatility forecasting"
-  - "Pioneering application of on-chain metrics in cryptocurrency derivatives volatility prediction"
-  - "Bridging traditional econometric methods with modern machine learning for DVOL forecasting"
-technologies: "Python (NumPy, pandas, scikit-learn, TensorFlow, Keras, SHAP), Stata (statistical analysis and econometric validation)"
-limitations_future_work:
-  - "Extend to multi-venue DVOL indices as markets mature"
-  - "Explore intraday features and higher-frequency variants"
-  - "Test alternative risk premium proxies (perpetual funding rates)"
+  - "HAR-RV (3 features): R² = 0.9454"
+  - "Random Forest (11 features): R² = 0.9492"
+  - "OLS (11 features): R² = 0.9490"
+contributions:
+  - "Multi-window normalization analysis: 72-hour window optimal for level prediction"
+  - "Standard Lee-Mykland (2008) implementation verification"
+  - "Pesaran-Timmermann (1992) directional accuracy methodology"
+  - "DataParallel evaluation artifact identification (13.3% R² degradation fix)"
+  - "Unified 17-model comparison framework"
+technologies: "Python, PyTorch, TensorFlow/Keras, Pandas, NumPy, Scikit-learn, SHAP"
 draft: false
 ---
 
 ## Abstract
 
-This comprehensive research project explores the application of Long Short-Term Memory (LSTM) neural networks for forecasting market volatility, with a specific focus on the CBOE Volatility Index (VIX). The thesis combines traditional financial econometrics with modern machine learning techniques to develop a hybrid forecasting model.
+This thesis develops and validates a Long Short-Term Memory (LSTM) neural network model for forecasting Bitcoin implied volatility (DVOL), the Deribit 30-day volatility index. Using a unified framework of 17 models (13 linear/tree baselines + 4 LSTM variants), we demonstrate that LSTM models achieve competitive performance (R² = 0.9287) when properly evaluated, narrowing the gap to linear/tree models to only 2%.
 
-## Research Methodology
+## Key Contributions
 
-### Data Collection & Preprocessing
-- Compiled comprehensive dataset spanning 2010-2023 of high-frequency market data
-- Integrated multiple data sources including equity indices, bond yields, and derivatives markets
-- Applied sophisticated feature engineering techniques to extract predictive variables
-- Implemented robust data validation and outlier detection procedures
+- **Multi-window normalization analysis**: 72-hour (3-day) window is optimal for R² level prediction
+- **Standard Lee-Mykland (2008) implementation**: Academically rigorous jump detection with 236 jumps (0.57%)
+- **DataParallel evaluation artifact**: Identified 13.3% R² degradation in multi-GPU LSTM evaluation
+- **LSTM competitiveness**: With fixed evaluation, LSTM (R²=0.9287) within 2% of best linear/tree models
 
-### Model Architecture
-The LSTM model incorporates a multi-layered architecture designed for sequential volatility prediction:
+## Model Comparison Results
 
-- **Input Layer**: 50-day lookback window with 12 engineered features
-- **Hidden Layers**: Two LSTM layers (128 and 64 neurons) with dropout regularization
-- **Output Layer**: Single neuron for next-day VIX prediction
-- **Optimization**: Adam optimizer with custom learning rate scheduling
+All 17 models use identical preprocessing (60/20/20 split, 720h rolling normalization):
 
-### Key Findings
+| Model | Type | Features | R² | RMSE |
+|-------|------|----------|-----|------|
+| RF (Lags + Jumps) | Tree | 11 | 0.9492 | 1.65 |
+| OLS (Lags + Jumps) | Linear | 11 | 0.9490 | 1.65 |
+| HAR-RV | Linear | 3 | 0.9454 | 1.71 |
+| **LSTM market_lags** | **LSTM** | **7** | **0.9287** | **1.71** |
 
-#### Predictive Performance
-- **Baseline Comparison**: Outperformed traditional GARCH models by 15% in RMSE
-- **Market Regime Analysis**: Superior performance during high volatility periods
-- **Cross-Validation**: Robust results across multiple time windows and market conditions
+## Practical Implications
 
-#### Feature Importance
-The research identified several critical predictors:
-1. **Lagged VIX values** (highest importance)
-2. **Term structure slope** (10Y-2Y Treasury spread)
-3. **Cross-asset correlations** (Equity-Bond correlation dynamics)
-4. **Market microstructure** (Bid-ask spreads and trading volume)
+- **Suitable for**: Risk management, option pricing, volatility level estimation, VaR calculations
+- **NOT suitable for**: Directional trading, market timing strategies
+- Directional accuracy ~50% across all models indicates hourly direction is fundamentally unpredictable
 
-## Academic Contributions
+## Code & Data
 
-This research contributes to the intersection of financial econometrics and machine learning by:
-
-- Demonstrating the efficacy of LSTM networks in volatility forecasting applications
-- Establishing a methodological framework for hybrid model development
-- Providing empirical evidence on feature selection for volatility prediction
-- Advancing understanding of market regime dynamics through neural network analysis
-
-## Technical Implementation
-
-The project utilizes advanced Python libraries including TensorFlow/Keras for model development, pandas for data manipulation, and specialized financial libraries for market data processing. The complete codebase implements reproducible research practices with comprehensive testing and validation procedures.
-
+The complete codebase, dataset documentation, and reproducibility instructions are available on GitHub.

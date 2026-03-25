@@ -1,0 +1,55 @@
+<!-- SEO Meta Tags -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+{{- /* Title */ -}}
+<title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
+
+{{- /* Description */ -}}
+{{ with .Description }}
+<meta name="description" content="{{ . }}">
+{{ else }}
+<meta name="description" content="{{ .Site.Params.description }}">
+{{ end }}
+
+{{- /* Keywords */ -}}
+{{ with .Site.Params.keywords }}
+<meta name="keywords" content="{{ delimit . ", " }}">
+{{ end }}
+
+{{- /* Canonical URL */ -}}
+<link rel="canonical" href="{{ .Permalink }}">
+
+{{- /* Author */ -}}
+<meta name="author" content="Lukas Rueda">
+
+{{- /* Open Graph / Facebook */ -}}
+<meta property="og:type" content="website">
+<meta property="og:url" content="{{ .Permalink }}">
+<meta property="og:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}">
+{{ with .Description }}
+<meta property="og:description" content="{{ . }}">
+{{ else }}
+<meta property="og:description" content="{{ .Site.Params.description }}">
+{{ end }}
+<meta property="og:image" content="{{ .Site.BaseURL }}images/og-image.png">
+<meta property="og:site_name" content="{{ .Site.Title }}">
+<meta property="og:locale" content="en_US">
+
+{{- /* Twitter */ -}}
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="{{ .Permalink }}">
+<meta name="twitter:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}">
+{{ with .Description }}
+<meta name="twitter:description" content="{{ . }}">
+{{ else }}
+<meta name="twitter:description" content="{{ .Site.Params.description }}">
+{{ end }}
+<meta name="twitter:image" content="{{ .Site.BaseURL }}images/og-image.png">
+
+{{- /* Favicon (placeholder) */ -}}
+<link rel="icon" type="image/png" href="{{ .Site.BaseURL }}images/favicon.png">
+
+{{- /* Google Site Verification (placeholder) */ -}}
+<meta name="google-site-verification" content="YOUR_VERIFICATION_CODE">
