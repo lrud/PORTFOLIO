@@ -37,7 +37,7 @@ enableRobotsTXT = true
 		url = "https://www.linkedin.com/in/lukas-r-15769637a"
 	[[params.social]]
 		name = "email"
-		url = "mailto:principles0s@pm.me"
+		url = "mailto:principlesOS@pm.me"
 
 [markup]
   [markup.goldmark]
