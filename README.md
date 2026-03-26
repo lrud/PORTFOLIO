@@ -8,6 +8,7 @@ A professional portfolio website built with Hugo showcasing quantitative researc
 - **CSS Framework**: Tailwind CSS
 - **Theme**: hello-friend-ng (customized)
 - **Deployment**: Nginx on Proxmox VM
+- **CDN/Cache**: Cloudflare
 - **Version Control**: Git with GitHub integration
 
 ## Project Structure
@@ -44,9 +45,19 @@ git push origin master
 ssh root@your-server-ip
 cd /var/www/html/
 git pull origin master
-hugo --minify
+hugo --gc --minify
 sudo systemctl reload nginx
+
+# 4. Purge Cloudflare cache (important!)
+# Go to Cloudflare dashboard → Caching → Configuration → Purge Everything
+# Or via API:
+curl -X POST "https://api.cloudflare.com/client/v4/zones/YOUR_ZONE_ID/purge_cache" \
+  -H "Authorization: Bearer YOUR_API_TOKEN" \
+  -H "Content-Type: application/json" \
+  --data '{"purge_everything":true}'
 ```
+
+> **Note:** After deployment, always purge Cloudflare cache. Old CSS/JS will be served otherwise.
 
 ## Content Management
 
@@ -99,6 +110,10 @@ Edit `content/about/_index.md` and use bullet points for role descriptions.
 ### March 2026
 - Added headshot to about page with clickable modal
 - Headshot positioned right of name/subtitle with balanced spacing
+- Dark mode set as default theme
+- Resume button now downloads PDF
+- Fixed white flash on page navigation
+- Email updated to principlesOS@pm.me
 
 ### October 2025
 - Projects page features three projects:
