@@ -27,7 +27,7 @@ enableRobotsTXT = true
 	keywords = ["economist", "risk analyst", "econometrics", "financial modeling", "volatility forecasting", "time-series analysis", "Hunter College", "quantitative research", "portfolio analysis"]
 	homeSubtitle = "Quantitative Economist specializing in financial econometrics, time-series analysis, and machine learning for volatility forecasting."
 	customCSS = ["css/custom.css", "css/tailwind.css", "css/mobile.css"]
-	googleAnalytics = "G-XXXXXXXXXX"
+	googleAnalytics = "G-FQ323YF5QV"
 
 	[[params.social]]
 		name = "github"
