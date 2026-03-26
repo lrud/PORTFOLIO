@@ -129,20 +129,11 @@
             localStorage.setItem('theme', theme);
         }
         
-        function initTheme() {
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme) {
-                setTheme(savedTheme);
-            }
-        }
-        
         toggle.addEventListener('click', function() {
             const isDark = html.hasAttribute('data-theme');
             const newTheme = isDark ? 'light' : 'dark';
             setTheme(newTheme);
         });
-        
-        initTheme();
     });
     </script>
 </body>
