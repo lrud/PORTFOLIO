@@ -2,6 +2,9 @@
 title: "LSTM Forecasting of Bitcoin Implied Volatility (DVOL)"
 status: "🟦 Writing Phase"
 subtitle: "Master's Thesis – Economics (STEM Designated)"
+description: "LSTM neural network model for forecasting Bitcoin implied volatility (DVOL) using on-chain metrics and historical volatility patterns, achieving R² = 0.9287 across a 17-model comparison framework."
+keywords: ["LSTM", "Bitcoin", "implied volatility", "DVOL", "deep learning", "forecasting"]
+tags: ["deep-learning", "volatility", "bitcoin"]
 github_url: "https://github.com/lrud/THESIS"
 overview: "This thesis develops and validates a Long Short-Term Memory (LSTM) neural network model for forecasting Bitcoin implied volatility (DVOL), the Deribit 30-day volatility index. Using a unified framework of 17 models (13 linear/tree baselines + 4 LSTM variants), we demonstrate that LSTM models achieve competitive performance (R² = 0.9287) when properly evaluated."
 research_objective: "Develop an LSTM neural network model to forecast Bitcoin implied volatility (DVOL) using on-chain metrics and historical volatility patterns, validated through statistical analysis and economic significance."

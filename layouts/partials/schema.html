@@ -1,14 +1,16 @@
-{{- /* Person Schema */ -}}
-{{ if .IsHome }}
+{{- $author := .Site.Params.author | default "Lukas Rueda" -}}
+{{- $isPost := eq .Section "posts" -}}
+
+{{- if .IsHome }}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Person",
-  "name": "Lukas Rueda",
-  "url": "{{ .Site.BaseURL }}",
+  "name": {{ $author }},
+  "url": {{ .Site.BaseURL }},
   "image": "{{ .Site.BaseURL }}images/headshot.jpg",
   "jobTitle": "Quantitative Economist & Risk Analyst",
-  "description": "{{ .Site.Params.description }}",
+  "description": {{ .Site.Params.description }},
   "email": "principlesOS@pm.me",
   "sameAs": [
     "https://github.com/lrud",
@@ -37,10 +39,9 @@
   ]
 }
 </script>
-{{ end }}
+{{- end }}
 
-{{- /* ProfessionalService Schema for Tutoring */ -}}
-{{ if eq .RelPermalink "/about/" }}
+{{- if eq .RelPermalink "/about/" }}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -50,7 +51,7 @@
   "url": "https://www.wyzant.com/Tutors/LukasR",
   "provider": {
     "@type": "Person",
-    "name": "Lukas Rueda"
+    "name": {{ $author }}
   },
   "serviceType": "Tutoring",
   "areaServed": {
@@ -86,18 +87,93 @@
   }
 }
 </script>
-{{ end }}
+{{- end }}
 
-{{- /* WebSite Schema */ -}}
+{{- if $isPost }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": {{ .Title }},
+  "description": {{ .Description | default .Site.Params.description }},
+  "author": {
+    "@type": "Person",
+    "name": {{ $author }},
+    "url": {{ .Site.BaseURL }}
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": {{ $author }}
+  },
+  "url": {{ .Permalink }},
+  "datePublished": {{ .Date.Format "2006-01-02T15:04:05Z07:00" }}{{ with .Lastmod }},
+  "dateModified": {{ .Format "2006-01-02T15:04:05Z07:00" }}{{ end }},
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": {{ .Permalink }}
+  }{{ with .Params.tags }},
+  "keywords": {{ delimit . ", " }}{{ end }}{{ with .Params.cover }},
+  "image": {{ . }}{{ else }},
+  "image": "{{ .Site.BaseURL }}images/og-image.png"{{ end }}
+}
+</script>
+{{- end }}
+
+{{- if not .IsHome }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": {{ .Site.BaseURL }}
+    }{{ if $isPost }},
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "{{ .Site.BaseURL }}posts/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": {{ .Title }},
+      "item": {{ .Permalink }}
+    }{{ else if eq .Section "projects" }},
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Projects",
+      "item": {{ .Permalink }}
+    }{{ else if eq .RelPermalink "/about/" }},
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "About",
+      "item": {{ .Permalink }}
+    }{{ end }}
+  ]
+}
+</script>
+{{- end }}
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  "name": "{{ .Site.Title }}",
-  "url": "{{ .Site.BaseURL }}",
+  "name": {{ .Site.Title }},
+  "url": {{ .Site.BaseURL }},
   "author": {
     "@type": "Person",
-    "name": "Lukas Rueda"
+    "name": {{ $author }}
+  },
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "{{ .Site.BaseURL }}posts/?q={search_term_string}",
+    "query-input": "required name=search_term_string"
   }
 }
 </script>

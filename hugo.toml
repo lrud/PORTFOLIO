@@ -1,3 +1,59 @@
+baseURL = 'https://www.principles0s.com/'
+languageCode = 'en-us'
+title = 'Lukas Rueda | Economist & Risk Analyst'
+theme = "hello-friend-ng"
+copyright = "Lukas Rueda"
+
+enableRobotsTXT = true
+
+[taxonomies]
+	tag = "tags"
+	category = "categories"
+
+[params]
+	author = "Lukas Rueda"
+	description = "Quantitative Economist and Researcher specializing in econometric modeling, time-series forecasting, and statistical analysis. M.A. Economics candidate at Hunter College with expertise in financial econometrics, volatility modeling, and risk assessment."
+	keywords = ["economist", "risk analyst", "econometrics", "financial modeling", "volatility forecasting", "time-series analysis", "Hunter College", "quantitative research", "portfolio analysis"]
+	homeSubtitle = "Quantitative Economist specializing in financial econometrics, time-series analysis, and machine learning for volatility forecasting."
+	customCSS = ["css/custom.css", "css/tailwind.css", "css/mobile.css"]
+	googleAnalytics = "G-FQ323YF5QV"
+
+	[[params.social]]
+		name = "github"
+		url = "https://github.com/lrud"
+	[[params.social]]
+		name = "linkedin"
+		url = "https://www.linkedin.com/in/lukas-r-15769637a"
+	[[params.social]]
+		name = "email"
+		url = "mailto:principlesOS@pm.me"
+
+[outputs]
+	home = ["HTML", "RSS"]
+	section = ["HTML", "RSS"]
+	page = ["HTML"]
+
+[outputFormats]
+	[outputFormats.RSS]
+		mediatype = "application/rss+xml"
+		baseName = "index"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[sitemap]
+	changefreq = "weekly"
+	filename = "sitemap.xml"
+	priority = 0.5
+
+[minify]
+	disableCSS = false
+	disableHTML = false
+	disableJS = false
+	minifyOutput = true
+
 [menu]
 	[[menu.main]]
 		identifier = "about"
@@ -16,47 +72,3 @@
 		name = "Blog"
 		url = "/posts/"
 		weight = 3
-
-baseURL = 'https://www.principles0s.com/'
-languageCode = 'en-us'
-title = 'Lukas Rueda | Economist & Risk Analyst'
-theme = "hello-friend-ng"
-
-enableRobotsTXT = true
-
-[taxonomies]
-	tag = "tags"
-	category = "categories"
-
-[params]
-	description = "Quantitative Economist and Researcher specializing in econometric modeling, time-series forecasting, and statistical analysis. M.A. Economics candidate at Hunter College with expertise in financial econometrics, volatility modeling, and risk assessment."
-	keywords = ["economist", "risk analyst", "econometrics", "financial modeling", "volatility forecasting", "time-series analysis", "Hunter College", "quantitative research", "portfolio analysis"]
-	homeSubtitle = "Quantitative Economist specializing in financial econometrics, time-series analysis, and machine learning for volatility forecasting."
-	customCSS = ["css/custom.css", "css/tailwind.css", "css/mobile.css"]
-	googleAnalytics = "G-FQ323YF5QV"
-
-	[[params.social]]
-		name = "github"
-		url = "https://github.com/lrud"
-	[[params.social]]
-		name = "linkedin"
-		url = "https://www.linkedin.com/in/lukas-r-15769637a"
-	[[params.social]]
-		name = "email"
-		url = "mailto:principlesOS@pm.me"
-
-[markup]
-  [markup.goldmark]
-    [markup.goldmark.renderer]
-      unsafe = true
-
-[sitemap]
-	changefreq = "weekly"
-	filename = "sitemap.xml"
-	priority = 0.5
-
-[minify]
-	disableCSS = false
-	disableHTML = false
-	disableJS = false
-	minifyOutput = true

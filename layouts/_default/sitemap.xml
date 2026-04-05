@@ -1,0 +1,15 @@
+{{ printf "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" | safeHTML }}
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+{{ range .Data.Pages }}
+  <url>
+    <loc>{{ .Permalink }}</loc>
+    {{ if not .Lastmod.IsZero }}<lastmod>{{ safeHTML ( .Lastmod.Format "2006-01-02T15:04:05-07:00" ) }}</lastmod>{{ end }}
+    {{ with .Sitemap.ChangeFreq }}<changefreq>{{ . }}</changefreq>{{ end }}
+    {{ if eq .Section "posts" }}<priority>0.8</priority>
+    {{ else if eq .RelPermalink "/" }}<priority>1.0</priority>
+    {{ else if eq .RelPermalink "/about/" }}<priority>0.9</priority>
+    {{ else if eq .Section "projects" }}<priority>0.7</priority>
+    {{ else }}<priority>0.5</priority>{{ end }}
+  </url>
+{{ end }}
+</urlset>

@@ -1,8 +1,11 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta http-equiv="refresh" content="0; url=/about/" />
-  </head>
-  <body>
-  </body>
-</html>
+{{ define "extra-head" }}
+<meta http-equiv="refresh" content="0; url=/about/" />
+{{ end }}
+
+{{ define "main" }}
+<div style="display: flex; justify-content: center; align-items: center; min-height: 60vh;">
+  <div style="text-align: center;">
+    <p style="color: var(--text-secondary); font-size: 1.125rem;">Redirecting to <a href="/about/" style="color: var(--accent); text-decoration: underline;">About</a>...</p>
+  </div>
+</div>
+{{ end }}

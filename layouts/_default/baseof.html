@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ .Site.Language.Lang | default "en" }}">
 <head>
     {{ partial "head.html" . }}
     <link rel="stylesheet" href="/css/tailwind.css">
@@ -69,6 +69,7 @@
     </style>
     {{ partial "schema.html" . }}
     {{ partial "analytics.html" . }}
+    {{ block "extra-head" . }}{{ end }}
 </head>
 <body class="min-h-screen">
     <nav style="position: sticky; top: 0; z-index: 50; padding: 1rem 0;">

@@ -6,62 +6,120 @@
   }
 })();
 </script>
-<!-- SEO Meta Tags -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="theme-color" content="#0f172a">
+<meta name="format-detection" content="telephone=no">
 
-{{- /* Title */ -}}
-<title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
+{{- $title := "" }}
+{{- if .IsHome }}
+  {{- $title = .Site.Title }}
+{{- else }}
+  {{- $title = printf "%s | %s" .Title .Site.Title }}
+{{- end }}
+<title>{{ $title }}</title>
 
-{{- /* Description */ -}}
-{{ with .Description }}
+{{- with .Description }}
 <meta name="description" content="{{ . }}">
-{{ else }}
+{{- else }}
 <meta name="description" content="{{ .Site.Params.description }}">
-{{ end }}
+{{- end }}
 
-{{- /* Keywords */ -}}
-{{ with .Site.Params.keywords }}
+{{- $keywords := slice }}
+{{- with .Site.Params.keywords }}
+  {{- $keywords = . }}
+{{- end }}
+{{- with .Params.tags }}
+  {{- $keywords = $keywords | append . }}
+{{- end }}
+{{- with .Params.keywords }}
+  {{- $keywords = $keywords | append . }}
+{{- end }}
+{{- with $keywords }}
 <meta name="keywords" content="{{ delimit . ", " }}">
-{{ end }}
+{{- end }}
 
-{{- /* Canonical URL */ -}}
 <link rel="canonical" href="{{ .Permalink }}">
 
-{{- /* Author */ -}}
-<meta name="author" content="Lukas Rueda">
+<meta name="author" content="{{ .Site.Params.author | default "Lukas Rueda" }}">
 
-{{- /* Open Graph / Facebook */ -}}
+{{- with .Params.robots }}
+<meta name="robots" content="{{ . }}">
+{{- end }}
+
+{{- $ogImage := "" }}
+{{- with .Params.images }}
+  {{- $ogImage = index . 0 }}
+{{- else }}
+  {{- with .Params.cover }}
+    {{- $ogImage = . }}
+  {{- end }}
+{{- end }}
+{{- if not $ogImage }}
+  {{- $ogImage = "/images/og-image.png" }}
+{{- end }}
+{{- $ogImageURL := $ogImage }}
+{{- if not (strings.HasPrefix $ogImage "http") }}
+  {{- $ogImageURL = printf "%s%s" (strings.TrimSuffix "/" .Site.BaseURL) $ogImage }}
+{{- end }}
+
+{{- if eq .Section "posts" }}
+<meta property="og:type" content="article">
+{{- else }}
 <meta property="og:type" content="website">
+{{- end }}
 <meta property="og:url" content="{{ .Permalink }}">
-<meta property="og:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}">
-{{ with .Description }}
+<meta property="og:title" content="{{ $title }}">
+{{- with .Description }}
 <meta property="og:description" content="{{ . }}">
-{{ else }}
+{{- else }}
 <meta property="og:description" content="{{ .Site.Params.description }}">
-{{ end }}
-<meta property="og:image" content="{{ .Site.BaseURL }}images/og-image.png">
+{{- end }}
+<meta property="og:image" content="{{ $ogImageURL }}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="{{ $title }}">
 <meta property="og:site_name" content="{{ .Site.Title }}">
 <meta property="og:locale" content="en_US">
 
-{{- /* Twitter */ -}}
+{{- if eq .Section "posts" }}
+{{- with .Date }}
+<meta property="article:published_time" content="{{ .Format "2006-01-02T15:04:05Z07:00" }}">
+{{- end }}
+{{- if and .Lastmod .Date }}
+{{- if ne (.Date.Format "2006-01-02") (.Lastmod.Format "2006-01-02") }}
+<meta property="article:modified_time" content="{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}">
+{{- end }}
+{{- end }}
+<meta property="article:author" content="{{ .Site.Params.author | default "Lukas Rueda" }}">
+{{- with .Params.tags }}
+{{- range . }}
+<meta property="article:tag" content="{{ . }}">
+{{- end }}
+{{- end }}
+<meta property="article:section" content="Blog">
+{{- end }}
+
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:url" content="{{ .Permalink }}">
-<meta name="twitter:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}">
-{{ with .Description }}
+<meta name="twitter:title" content="{{ $title }}">
+{{- with .Description }}
 <meta name="twitter:description" content="{{ . }}">
-{{ else }}
+{{- else }}
 <meta name="twitter:description" content="{{ .Site.Params.description }}">
-{{ end }}
-<meta name="twitter:image" content="{{ .Site.BaseURL }}images/og-image.png">
+{{- end }}
+<meta name="twitter:image" content="{{ $ogImageURL }}">
+<meta name="twitter:image:alt" content="{{ $title }}">
 
-{{- /* Favicon */ -}}
+{{- with .OutputFormats.Get "RSS" }}
+<link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink }}" title="{{ $.Site.Title }}">
+{{- end }}
+
+<link rel="sitemap" href="/sitemap.xml">
+
 <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="shortcut icon" href="/favicon.ico" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 <link rel="manifest" href="/site.webmanifest" />
-
-{{- /* Google Site Verification (placeholder) */ -}}
-<meta name="google-site-verification" content="YOUR_VERIFICATION_CODE">

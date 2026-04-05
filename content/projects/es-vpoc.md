@@ -2,6 +2,9 @@
 title: "ES Futures VPOC Strategy Backtester"
 status: "🟩 Completed"
 subtitle: "Algorithmic Trading & Machine Learning"
+description: "Algorithmic trading strategy for E-mini S&P 500 futures combining Volume Point of Control analysis with statistical validation and machine learning enhancements."
+keywords: ["algorithmic trading", "VPOC", "futures", "machine learning", "backtesting", "S&P 500"]
+tags: ["algorithmic-trading", "machine-learning", "futures"]
 overview: "Advanced algorithmic trading strategy for E-mini S&P 500 (ES) futures that combines Volume Point of Control (VPOC) analysis with statistical validation and machine learning. The strategy identifies high-probability trading opportunities by analyzing volume distribution patterns, value area migrations, and market microstructure. ML enhancements include feature engineering, neural network models, and distributed training for AMD GPUs."
 objectives:
   - "Develop and backtest VPOC-based trading strategies"

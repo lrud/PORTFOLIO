@@ -1,9 +1,5 @@
 ---
-title: "Welcome"
+title: "Lukas Rueda | Quantitative Economist & Risk Analyst"
+description: "Quantitative Economist and Researcher specializing in econometric modeling, time-series forecasting, and statistical analysis. M.A. Economics candidate at Hunter College."
+keywords: ["economist", "risk analyst", "portfolio", "financial econometrics", "volatility forecasting"]
 ---
-
-# Lukas
-
-Hi, I'm Lukas. Welcome to my personal portfolio site!
-
-I am a passionate developer and technology enthusiast. This site showcases my background, experience, and projects. Feel free to explore and learn more about me and my work.

@@ -1,6 +1,9 @@
 {
   "name": "Lukas Rueda | Economist & Risk Analyst",
   "short_name": "Lukas Rueda",
+  "description": "Quantitative Economist specializing in financial econometrics, time-series analysis, and volatility forecasting.",
+  "start_url": "/",
+  "scope": "/",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",

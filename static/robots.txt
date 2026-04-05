@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
+Disallow: /tags/
+Disallow: /categories/
+Disallow: /page/
 
 Sitemap: https://www.principles0s.com/sitemap.xml
