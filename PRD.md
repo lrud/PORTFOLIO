@@ -63,24 +63,86 @@
 - Uses prebuilt solutions wherever possible.
 - Securely exposed to the internet via Cloudflared Zero Trust.
 
-## Blog Post Front Matter (Required for SEO)
+## SEO Status (Verified in Google Rich Results Test + Search Console)
 
-Every blog post in `content/posts/` must include these front matter fields for full SEO coverage:
+**Structured data validated:**
+- Blog posts: BlogPosting schema, BreadcrumbList schema, article OG tags (og:type, published_time, author, tag, section)
+- About page: ProfessionalService schema, BreadcrumbList schema
+- All pages: WebSite schema with SearchAction
+- Homepage: Person schema
+
+**Sitemap:** Submitted and accepted — 23 pages discovered (as of Apr 2026)
+
+**What's in place site-wide:**
+- Open Graph + Twitter Card meta tags on every page
+- Page-specific OG images (blog posts use `cover` param, other pages use default `og-image.png`)
+- RSS feed auto-discovery link in `<head>`
+- Custom sitemap with per-section priorities (home=1.0, about=0.9, posts=0.8, projects=0.7)
+- robots.txt blocking thin/duplicate taxonomy pages (/tags/, /categories/)
+- Custom 404 page
+- Google Analytics 4 (DNS-verified in Search Console)
+- HTML minification enabled
+
+## Creating a New Blog Post — Step by Step
+
+### 1. Create the post file
+File: `content/posts/<slug>.md`
 
 ```yaml
 ---
 title: "Post Title"
-date: 2026-04-05
+date: 2026-04-10
 draft: false
-description: "1-2 sentence summary used in meta tags, OG description, and search results."
-keywords: ["keyword1", "keyword2"]        # merged with tags into meta keywords
-tags: ["tag1", "tag2"]                    # used in OG article:tag + visible tag badges
-cover: "/images/blog/post-slug/image.png" # OG/social preview image (1200x630 recommended)
-coverAlt: "Description of cover image"    # alt text for cover image
+description: "1-2 sentence summary. Used in meta description, OG description, and Google search results."
+keywords: ["keyword1", "keyword2"]
+tags: ["tag1", "tag2"]
+cover: "/images/blog/<slug>/cover.png"
+coverAlt: "Description of cover image"
 ---
+
+Post content goes here in Markdown.
 ```
 
-- `description` and `tags` are the minimum required fields
-- `cover` overrides the default `og-image.png` for social previews on that post
-- `keywords` are optional — tags are automatically merged into the keywords meta tag
-- Blog posts automatically get: `og:type=article`, `article:published_time`, `article:author`, `article:tag`, `article:section`, BlogPosting JSON-LD schema, and BreadcrumbList schema
+### 2. Add images
+Create directory: `static/images/blog/<slug>/`
+
+Place images there. Reference them inline:
+```
+![Alt text describing the image](/images/blog/<slug>/filename.png "Optional title text")
+```
+
+### 3. Front matter fields for SEO
+| Field | Required | Purpose |
+|---|---|---|
+| `title` | Yes | Page `<title>`, OG title, schema headline |
+| `date` | Yes | `article:published_time`, schema datePublished |
+| `description` | Yes | Meta description, OG description, search result snippet |
+| `tags` | Yes | Visible tag badges + `article:tag` OG tags + merged into keywords meta |
+| `keywords` | No | Additional keywords merged into meta keywords tag |
+| `cover` | Recommended | OG/social preview image. If omitted, default `og-image.png` is used |
+| `coverAlt` | If cover set | Alt text for cover image in OG `og:image:alt` |
+| `draft` | Yes | Set to `false` to publish |
+
+### 4. Inline citations (if needed)
+```markdown
+Text with citation.<sup>[1](#ref-1)</sup>
+
+---
+
+### References
+
+1. <a id="ref-1"></a>Author, "Title," Date. [Link](https://url)
+```
+
+### 5. Build and deploy
+```bash
+git add . && git commit -m "Add blog post: <title>"
+git push
+# Then on server: git pull && hugo --gc --minify && reload nginx && purge cloudflare
+```
+
+### 6. Post-publish SEO checks
+- Google Search Console → Sitemaps → resubmit `sitemap.xml`
+- Google Search Console → URL Inspection → paste new post URL → "Request indexing"
+- [Rich Results Test](https://search.google.com/test/rich-results) — paste URL to verify BlogPosting + BreadcrumbList schema
+- [LinkedIn Post Inspector](https://www.linkedin.com/post-inspector/) — verify OG image/title/description preview
