@@ -62,3 +62,25 @@
 - Site loads quickly and works on all devices.
 - Uses prebuilt solutions wherever possible.
 - Securely exposed to the internet via Cloudflared Zero Trust.
+
+## Blog Post Front Matter (Required for SEO)
+
+Every blog post in `content/posts/` must include these front matter fields for full SEO coverage:
+
+```yaml
+---
+title: "Post Title"
+date: 2026-04-05
+draft: false
+description: "1-2 sentence summary used in meta tags, OG description, and search results."
+keywords: ["keyword1", "keyword2"]        # merged with tags into meta keywords
+tags: ["tag1", "tag2"]                    # used in OG article:tag + visible tag badges
+cover: "/images/blog/post-slug/image.png" # OG/social preview image (1200x630 recommended)
+coverAlt: "Description of cover image"    # alt text for cover image
+---
+```
+
+- `description` and `tags` are the minimum required fields
+- `cover` overrides the default `og-image.png` for social previews on that post
+- `keywords` are optional — tags are automatically merged into the keywords meta tag
+- Blog posts automatically get: `og:type=article`, `article:published_time`, `article:author`, `article:tag`, `article:section`, BlogPosting JSON-LD schema, and BreadcrumbList schema
