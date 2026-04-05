@@ -83,6 +83,7 @@
                 <div class="nav-bubble desktop-nav">
                     <a href="/about/" class="nav-link {{ if eq .RelPermalink "/about/" }}active{{ end }}">About</a>
                     <a href="/projects/" class="nav-link {{ if hasPrefix .RelPermalink "/projects" }}active{{ end }}">Projects</a>
+                    <a href="/posts/" class="nav-link {{ if hasPrefix .RelPermalink "/posts" }}active{{ end }}">Blog</a>
                 </div>
                 
                 <!-- Right side: Theme toggle + Mobile menu -->

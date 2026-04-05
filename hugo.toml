@@ -11,6 +11,12 @@
 		url = "/projects/"
 		weight = 2
 
+	[[menu.main]]
+		identifier = "blog"
+		name = "Blog"
+		url = "/posts/"
+		weight = 3
+
 baseURL = 'https://www.principles0s.com/'
 languageCode = 'en-us'
 title = 'Lukas Rueda | Economist & Risk Analyst'
