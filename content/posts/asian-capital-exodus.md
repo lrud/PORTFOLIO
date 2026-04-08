@@ -5,8 +5,6 @@ draft: false
 description: "How the Iranian conflict is disproportionately punishing Asian capital markets through energy dependence, equity outflows, and currency depreciation."
 keywords: ["Asian capital markets", "Iranian conflict", "energy dependence", "equity outflows", "currency depreciation", "macro risk"]
 tags: ["macro", "geopolitics", "asia", "energy", "bonds"]
-cover: "/images/blog/asian-capital-exodus/export.png"
-coverAlt: "Asian crude oil import dependence by country"
 ---
 
 Since the start of the Iranian conflict on Feb 28th, significant macro developments have occurred. As a net exporter of oil, the US has been somewhat hedged against the negative implications of rising crude prices, especially when compared to the vast majority of Asian countries.
